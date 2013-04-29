@@ -29,6 +29,7 @@ function NewsControl() {
         self.feeds = new Feeds();
         self.tags = new Tags();
         self.user = new User();
+        self.topBar = new TopBar(self);
     };
 
     self.showLoginModal = function() {
@@ -78,5 +79,7 @@ function NewsControl() {
                 console.error(e);
                 throw e;
         }
+        
+        localStorage.lastTab = tabName;
     };
 }
