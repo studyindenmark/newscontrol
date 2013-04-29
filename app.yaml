@@ -1,0 +1,29 @@
+application: newscontrol
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /bootstrap
+  static_dir: bootstrap
+
+- url: /js
+  static_dir: js
+
+- url: /css
+  static_dir: css
+
+- url: /img
+  static_dir: img
+  expiration: "1d"
+
+- url: /.*
+  static_files: index.html
+  upload: index.html
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest

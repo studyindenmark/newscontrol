@@ -1,0 +1,14 @@
+.pointer {
+    cursor: pointer;
+}
+
+.brand {
+    width: 120px;
+    padding-bottom: 2px !important;
+    padding-top: 2px !important;
+}
+
+.share img {
+    margin-right: 10px;
+    cursor: pointer;
+}
