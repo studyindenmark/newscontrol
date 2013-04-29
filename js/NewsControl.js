@@ -1,6 +1,5 @@
 function NewsControl() {
-    var self = this,
-        user = null;
+    var self = this;
 
     self.init = function() {
         // Make sure we can log without breaking old browsers
@@ -25,13 +24,15 @@ function NewsControl() {
             }
         });
 
-        // Setup news, feeds and tags
+        // Setup user, news, feeds and tags
         self.news = new News();
         self.news.init();
         self.feeds = new Feeds();
         self.feeds.init();
         self.tags = new Tags();
         self.tags.init();
+        self.user = new User();
+        self.user.init();
     };
 
     self.showLoginModal = function() {
