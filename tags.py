@@ -48,7 +48,6 @@ class TagsHandler(webapp2.RequestHandler):
             title=title,
             title_lower=title.lower(),
         )
-        
         m.put()
         
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
