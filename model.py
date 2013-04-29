@@ -9,17 +9,17 @@ class User(db.Model):
     deleted = db.BooleanProperty(default=False)
     
     def fetch_feeds(self):
-    	return {}
+        return {}
     
     def to_struct(self):
-    	if self.deleted:
-	    	return None
-    	else:
-    		return {
-    			'id': self.key().id(),
-    			'email': self.google_user.email(),
-    			'nickname': self.nickname
-    		}
+        if self.deleted:
+            return None
+        else:
+            return {
+                'id': self.key().id(),
+                'email': self.google_user.email(),
+                'nickname': self.nickname
+            }
 
 class InviteToken(db.Model):
     email = db.StringProperty()
@@ -33,14 +33,14 @@ class InputFeed(db.Model):
     deleted = db.BooleanProperty()
 
     def fetch_entries(self):
-    	return []
+        return []
 
     def to_struct(self):
-		return {
-			'title': self.title,
-			'url': self.url,
-			'time_fetched': mktime(self.time_fetched.timetuple()),
-		}
+        return {
+            'title': self.title,
+            'url': self.url,
+            'time_fetched': mktime(self.time_fetched.timetuple()),
+        }
 
 class Entry(db.Model):
     #parent(InputFeed)
@@ -54,20 +54,20 @@ class Entry(db.Model):
     user = db.ReferenceProperty(reference_class=User)
 
     def to_struct(self, include_tags=False):
-    	tags = []
-    	if include_tags:
-    		for tag in db.get(self.tags):
-				tags.append(tag.to_struct())
-    	
-    	return {
-    		'id': self.id,
-    		'title': self.title,
-    		'content': self.summary,
-    		'link': self.link,
-    		'time_published': mktime(self.time_published.timetuple()),
-    		'published': self.published,
-    		'tags': tags,
-    	}
+        tags = []
+        if include_tags:
+            for tag in db.get(self.tags):
+                tags.append(tag.to_struct())
+        
+        return {
+            'id': self.id,
+            'title': self.title,
+            'content': self.summary,
+            'link': self.link,
+            'time_published': mktime(self.time_published.timetuple()),
+            'published': self.published,
+            'tags': tags,
+        }
 
 class Tag(db.Model):
     #parent(User)
@@ -77,19 +77,19 @@ class Tag(db.Model):
     entries = db.ListProperty(db.Key)
 
     def tag_entry(self, entry):
-    	self.entry_count += 1
-    	entry.tags.append(self.Key())
-    	entry.save()
-    	self.save()
+        self.entry_count += 1
+        entry.tags.append(self.Key())
+        entry.save()
+        self.save()
 
-    def to_struct(include_entries=False):
-    	entries = []
-    	if include_entries:
-    		for entry in entries:
-    			entries.append(entry.to_struct())
+    def to_struct(self, include_entries=False):
+        entries = []
+        if include_entries:
+            for entry in entries:
+                entries.append(entry.to_struct())
 
-		return {
-			'title': self.title,
-			'entry_count': self.entry_count,
-			'entries': entries,
-		}
+        return {
+            'title': self.title,
+            'entry_count': self.entry_count,
+            'entries': entries,
+        }
