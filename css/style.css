@@ -29,6 +29,10 @@
     margin-bottom: 0;
 }
 
+.tags {
+    margin: 0;
+}
+
 .tag {
     margin: 0 5px 0 0;
 }
@@ -38,4 +42,8 @@ input[type="text"].input-low {
    font-size: 12px;
    line-height: 14px;
    margin: 0;
+}
+
+.entry-list .media {
+    padding: 5px;
 }
