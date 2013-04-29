@@ -29,7 +29,7 @@ class InputFeed(db.Model):
     # parent(User)
     title = db.StringProperty()
     url = db.StringProperty()
-    time_fetched = db.DateTimeProperty()
+    time_fetched = db.DateTimeProperty(auto_now_add=True)
     deleted = db.BooleanProperty()
 
     def fetch_entries(self):
