@@ -37,15 +37,15 @@ class FeedsHandler(webapp2.RequestHandler):
         url = self.request.get('url')
         
         feed = feedparser.parse(url)
-        feed = feed['feed']
+        feed = feed.get('feed')
         
-        id = feed['id']
-        title = feed['title']
-        content = feed['summary'] # Yes, summary.
-        link = feed['link']
+        id = feed.get('id')
+        title = feed.get('title')
+        content = feed.get('summary') # Yes, summary.
+        link = feed.get('link')
         
         if 'content' in feed:
-            content = feed['content']['value']
+            content = feed.get('content').get('value')
             
         m = InputFeed(
             parent=user.key(),
