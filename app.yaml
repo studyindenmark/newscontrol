@@ -27,7 +27,7 @@ handlers:
 - url: /logout
   script: logout.app
 
-- url: /.*
+- url: /
   static_files: index.html
   upload: index.html
 
