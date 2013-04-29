@@ -113,7 +113,7 @@
                             <li class=""><a href="#">Title</a></li>
                         </ul>
                     </div>
-                    <ul class="entry-list unstyled-list">
+                    <ul class="entry-list unstyled">
                         <li class="template media">
                             <a class="pull-left" href="#">
                                 <img class="media-object" src="http://lorempixel.com/64/64/cats" />
@@ -142,7 +142,7 @@
                         <button class="inline btn add">Add</button>
                     </div>
                 </div>
-                <ul class="feeds-list unstyled-list">
+                <ul class="feeds-list unstyled">
                     <li class="template feed media">
                         <a class="pull-left" href="#">
                             <img class="media-object" src="http://lorempixel.com/64/64/cats" />
@@ -151,14 +151,33 @@
                             <h4 class="media-heading title">Feed heading</h4>
                             <a class="url" href="http://thefeedurl.com">http://thefeedurl.com</a>
                         </div>
-                        <a class="btn publish pull-right span2 btn-danger">Remove</a>
+                        <a class="btn pull-right span2 btn-danger">Remove</a>
                     </li>
                 </ul>
             </div>
 
             <!-- Tags -->
             <div id="tags">
-
+                <div class="add clearfix well">
+                    <div class="input-append pull-right">
+                        <input class="input-xlarge" placeholder="Tag name" type="text" name="title" />
+                        <button class="inline btn add">Add</button>
+                    </div>
+                </div>
+                <ul class="tags-list unstyled">
+                    <li class="template tag">
+                        <div class="title-container">
+                            <h4 class="title pull-left">Title</h4>
+                            <span class="badge badge-info pull-left">1</span>
+                        </div>
+                        <div class="title-edit pull-left input-append">
+                            <input class="input-large" type="text" placeholder="Tag name" name="title" />
+                            <button class="btn btn-primary"><i class="icon-ok icon-white"></i></button>
+                        </div>
+                        <a class="btn pull-right span1 btn-danger">Remove</a>
+                        <a class="btn pull-right span1 btn-info">Edit</a>
+                    </li>
+                </ul>
             </div>
         </div>
         <!-- /container -->

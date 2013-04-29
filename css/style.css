@@ -56,3 +56,11 @@ input[type="text"].input-low {
 .media-subheader {
     font-size: 13px;
 }
+
+
+.tags-list .title-edit {
+    display: none;
+}
+.tags-list .badge {
+    margin: 10px 5px 0 5px;
+}
