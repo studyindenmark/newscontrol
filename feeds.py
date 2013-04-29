@@ -36,6 +36,10 @@ class FeedsHandler(webapp2.RequestHandler):
         user = utils.get_current_user_model()
         url = self.request.get('url')
         
+        if not user:
+            self.error(403)
+            return
+        
         feed = feedparser.parse(url)
         feed = feed.get('feed')
         
