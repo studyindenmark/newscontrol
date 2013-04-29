@@ -17,3 +17,18 @@
 .dropdown.user {
     display: none;
 }
+#news > .search {
+    margin-bottom: 15px;
+}
+
+#news .sorting.well {
+    padding: 5px;
+}
+
+#news .sorting .nav {
+    margin-bottom: 0;
+}
+
+.tag {
+    margin: 0 5px 0 0;
+}
