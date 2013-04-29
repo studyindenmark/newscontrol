@@ -74,14 +74,13 @@ class Tag(db.Model):
     entry_count = db.IntegerProperty(default=0)
     entries = db.ListProperty(db.Key)
 
-    def tag_entry(self, entry) {
+    def tag_entry(self, entry):
     	self.entry_count += 1
     	entry.tags.append(self.Key())
     	entry.save()
     	self.save()
-    }
 
-    to_struct(include_entries=False):
+    def to_struct(include_entries=False):
     	entries = []
     	if include_entries:
     		for entry in entries:
