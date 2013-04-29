@@ -1,10 +1,14 @@
 function Feeds() {
     var self = this;
+    
+    self.$view = $("#feeds");
+    self.$ul = self.$view.find('> ul');
 
     self.initialized = false;
 
     self.init = function() {
         self.initialized = true;
+        self.loadFeeds();
     };
     
     $('#feeds .btn.add').click(function() {
@@ -24,4 +28,13 @@ function Feeds() {
             console.log('feed added', data);
         });
     });
+    
+    self.loadFeeds = function() {
+        $.getJSON('/feeds').success(function(data) {
+            $.each(data, function(i, item) {
+                var $view = HTML.createFeed(item);
+                self.$ul.append($view);
+            });
+        });
+    };
 }
