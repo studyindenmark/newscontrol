@@ -31,7 +31,7 @@ function NewsControl() {
             keyboard: true,
             show: true
         });
-    }
+    };
 
     self.showErrorModal = function(message) {
         $('#errorModal .message').text(message);
@@ -40,5 +40,15 @@ function NewsControl() {
             keyboard: true,
             show: true
         });
-    }
+    };
+
+    self.changeTab = function(tabName) {
+        var $nav = $('.navbar-inner .nav'),
+            $container = $('body > .container');
+        $nav.find('> li').removeClass('active');
+        $nav.find('.' + tabName).addClass('active');
+
+        $container.children('div').hide();
+        $container.children('#' + tabName).show();
+    };
 }
