@@ -17,6 +17,7 @@ class User(db.Model):
     	else:
     		return {
     			'id': self.key().id(),
+    			'email': self.google_user.email(),
     			'nickname': self.nickname
     		}
 
