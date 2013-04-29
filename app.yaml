@@ -24,6 +24,9 @@ handlers:
 - url: /tags
   script: tags.app
 
+- url: /news
+  script: news.app
+
 - url: /login
   script: login.app
 
