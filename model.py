@@ -16,6 +16,7 @@ class User(db.Model):
 	    	return None
     	else:
     		return {
+    			'id': self.key().id(),
     			'nickname': self.nickname
     		}
 
