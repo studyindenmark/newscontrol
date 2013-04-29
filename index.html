@@ -64,7 +64,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="/js/jquery-2.0.0.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/js/script.js"></script>
-
+    <script src="/js/NewsControl.js"></script>
+    <script>
+      window.newsControl = new NewsControl();
+      $(document).ready(function() {
+        newsControl.init();
+      });
+    </script>
   </body>
 </html>
