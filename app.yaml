@@ -27,6 +27,9 @@ handlers:
 - url: /logout
   script: logout.app
 
+- url: /me
+  script: me.app
+
 - url: /
   static_files: index.html
   upload: index.html
