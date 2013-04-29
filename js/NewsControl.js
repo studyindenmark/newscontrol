@@ -27,11 +27,9 @@ function NewsControl() {
 
         // Setup news, feeds and tags
         self.news = new News();
-        self.news.init();
         self.feeds = new Feeds();
-        self.feeds.init();
         self.tags = new Tags();
-        self.tags.init();
+        self.news.init();
     };
 
     self.showLoginModal = function() {
@@ -59,5 +57,27 @@ function NewsControl() {
 
         $container.children('div').hide();
         $container.children('#' + tabName).show();
+
+        switch(tabName) {
+            case 'news':
+                if (self.news.initialized === false) {
+                    self.news.init();
+                }
+                break;
+            case 'feeds':
+                if (self.feeds.initialized === false) {
+                    self.feeds.init();
+                }
+                break;
+            case 'tags':
+                if (self.tags.initialized === false) {
+                    self.tags.init();
+                }
+                break;
+            default:
+                var e = 'NewsControl.changeTab: Cannot initialize tab \"' + tabName + '\"';
+                console.error(e);
+                throw e;
+        }
     };
 }

@@ -1,8 +1,9 @@
 function Feeds() {
     var self = this;
 
-    self.init = function() {
-    
-    }
+    self.initialized = false;
 
+    self.init = function() {
+        self.initialized = true;
+    }
 }
