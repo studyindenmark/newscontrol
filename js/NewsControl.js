@@ -14,9 +14,11 @@ function NewsControl() {
         $(document).ajaxError(function (e, r, ajaxOptions, thrownError) {
             switch (r.status) {
                 case 403:
+                    // Logged out
                     self.showLoginModal();
                     break;
                 case 500:
+                    // Server error
                     self.showErrorModal(r.responseText);
                     break;
             }
