@@ -136,22 +136,23 @@
 
             <!-- Feeds -->
             <div id="feeds">
-                <div class="row add">
-                    <input placeholder="URL" type="text" name="url" value="http://blog.youtify.com/feeds/posts/default" />
-                    <span class="btn add">Add</span>
+                <div class="add clearfix well">
+                    <div class="input-append pull-right">
+                        <input class="input-medium" type="text" placeholder="Title" name="title" />
+                        <input class="input-xlarge" placeholder="URL" type="text" name="url" value="http://blog.youtify.com/feeds/posts/default" />
+                        <button class="inline btn add">Add</button>
+                    </div>
                 </div>
-                <ul>
-                    <li class="template feed row">
-                        <div class="media span12">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://lorempixel.com/64/64/cats" />
-                            </a>
-                            <div class="media-body span8">
-                                <h4 class="media-heading title">Feed heading</h4>
-                                <a class="url" href="http://thefeedurl.com">http://thefeedurl.com</a>
-                            </div>
-                            <a class="btn publish pull-right span2"><i class="icon-remove"></i>Remove</a>
+                <ul class="feeds-list unstyled-list">
+                    <li class="template feed media">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="http://lorempixel.com/64/64/cats" />
+                        </a>
+                        <div class="media-body span8">
+                            <h4 class="media-heading title">Feed heading</h4>
+                            <a class="url" href="http://thefeedurl.com">http://thefeedurl.com</a>
                         </div>
+                        <a class="btn publish pull-right span2 btn-danger">Remove</a>
                     </li>
                 </ul>
             </div>

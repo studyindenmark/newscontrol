@@ -17,7 +17,8 @@
 .dropdown.user {
     display: none;
 }
-#news > .search {
+#news > .search,
+#feeds > .add {
     margin-bottom: 15px;
 }
 
@@ -44,10 +45,11 @@ input[type="text"].input-low {
    margin: 0;
 }
 
-.entry-list {
+.entry-list, .feeds-list {
     margin: 0;
 }
-.entry-list .media {
+.entry-list .media,
+.feeds-list .media {
     padding: 5px;
 }
 
