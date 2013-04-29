@@ -28,6 +28,7 @@ class InviteToken(db.Model):
 class InputFeed(db.Model):
     # parent(User)
     title = db.StringProperty()
+    logo = db.StringProperty()
     url = db.StringProperty()
     time_fetched = db.DateTimeProperty(auto_now_add=True)
     deleted = db.BooleanProperty()
@@ -38,6 +39,7 @@ class InputFeed(db.Model):
     def to_struct(self):
         return {
             'title': self.title,
+			'logo': self.logo,
             'url': self.url,
             'time_fetched': mktime(self.time_fetched.timetuple()),
         }
