@@ -21,6 +21,12 @@ handlers:
 - url: /feeds
   script: feeds.app
 
+- url: /login
+  script: login.app
+
+- url: /logout
+  script: logout.app
+
 - url: /.*
   static_files: index.html
   upload: index.html
