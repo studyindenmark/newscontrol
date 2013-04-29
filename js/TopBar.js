@@ -38,4 +38,11 @@ function TopBar(newsControl) {
     if (localStorage.lastTab !== undefined) {
         self.changeTab(localStorage.lastTab);
     }
+    
+    $('.navbar .tabs li a').click(function(event) {
+        event.preventDefault();
+        
+        var tabName = $(this).attr('rel');
+        self.changeTab(tabName);
+    });
 }
