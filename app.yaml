@@ -18,6 +18,9 @@ handlers:
   static_dir: img
   expiration: "1d"
 
+- url: /feeds
+  script: feeds.app
+
 - url: /.*
   static_files: index.html
   upload: index.html
