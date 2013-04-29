@@ -12,3 +12,8 @@
     margin-right: 10px;
     cursor: pointer;
 }
+
+/* Hide user dropdown until loaded. */
+.dropdown.user {
+    display: none;
+}

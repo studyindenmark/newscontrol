@@ -10,6 +10,7 @@ function User() {
         self.id = data.id;
         self.nickname = data.nickname;
         self.email = data.email;
-        $('.dropdown .username').text(self.email);
+        $('.dropdown.user .username').text(self.email);
+        $('.dropdown.user').show();
     });
 }
