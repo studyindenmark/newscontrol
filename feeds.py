@@ -49,6 +49,7 @@ class FeedsHandler(webapp2.RequestHandler):
             
         m = InputFeed(
             parent=user.key(),
+            url=url,
             title=title,
             content=content,
             link=link,
