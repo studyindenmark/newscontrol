@@ -32,28 +32,56 @@
   </head>
 
   <body>
-
-      <div class="navbar navbar-fixed-top">
-          <div class="navbar-inner">
-              <div class="container">
-                  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </a>
-                  <div class="nav-collapse collapse">
-                      <ul class="nav">
-                          <li><a class="historyapi" href="/">News</a></li>
-                          <li><a class="historyapi" href="/feeds">Feeds</a></li>
-                          <li><a class="historyapi" href="/tags">Tags</a></li>
-                      </ul>
-                      <div class="navbar-search pull-right">
-                          <span>User</span>
-                      </div>
-                  </div><!--/.nav-collapse -->
-              </div>
-          </div>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>You are not logged in</h3>
       </div>
+      <div class="modal-body">
+        <div class="hero">
+          <a class="btn btn-primary btn-large pull-right" href="/login">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="errorModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">An error has occurred</h3>
+        <p>But don't worry, below are the error codes. Give this to the IT crowd.</p>
+      </div>
+      <div class="modal-body">
+        <p class="message muted"></p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+      </div>
+    </div>
+
+
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a class="historyapi" href="/">News</a></li>
+                        <li><a class="historyapi" href="/feeds">Feeds</a></li>
+                        <li><a class="historyapi" href="/tags">Tags</a></li>
+                    </ul>
+                    <div class="navbar-search pull-right">
+                        <span>User</span>
+                    </div>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <p class="status alert" style="display:none"></p>
