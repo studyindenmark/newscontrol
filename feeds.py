@@ -55,6 +55,10 @@ class FeedsHandler(webapp2.RequestHandler):
         )
         
         m.put()
+        
+        self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        self.response.headers['Access-Control-Allow-Origin'] = '*'
+        self.response.out.write(json.dumps(m.to_struct()))
 
 app = webapp2.WSGIApplication([
     ('/feeds', FeedsHandler),
