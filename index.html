@@ -70,14 +70,26 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="nav-collapse collapse">
-                        <ul class="nav">
+                        <ul class="nav tabs">
                             <li class="news active"><a href="javascript:newsControl.changeTab('news');">News</a></li>
                             <li class="feeds"><a href="javascript:newsControl.changeTab('feeds');">Feeds</a></li>
                             <li class="tags"><a href="javascript:newsControl.changeTab('tags');">Tags</a></li>
                         </ul>
-                        <div class="navbar-search pull-right">
-                            <span>User</span>
-                        </div>
+                        <ul class="nav pull-right">
+                            <li class="divider-vertical"></li>
+                            <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle navbar-link">
+                                    <i class="icon-user"></i>&nbsp;
+                                    <span class="username">Username</span>&nbsp;
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Invite user</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/logout">Log out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

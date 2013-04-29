@@ -43,7 +43,7 @@ function NewsControl() {
     };
 
     self.changeTab = function(tabName) {
-        var $nav = $('.navbar-inner .nav'),
+        var $nav = $('.navbar-inner .nav.tabs'),
             $container = $('body > .container');
         $nav.find('> li').removeClass('active');
         $nav.find('.' + tabName).addClass('active');
