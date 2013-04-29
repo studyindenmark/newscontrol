@@ -41,7 +41,7 @@ function NewsControl() {
     };
 
     self.showErrorModal = function(message) {
-        $('#errorModal .message').text(message);
+        $('#errorModal .message').html(message);
         $('#errorModal').modal({
             backdrop: 'static',
             keyboard: true,
