@@ -11,7 +11,7 @@ function Tags() {
             .keydown(self.titleKeyDown)
             .keyup(self.titleKeyUp);
         $(document).on('click', '#tags .tag .btn.edit', self.showEdit);
-        $(document).on('click', '#tags .tag .btn.save', self.hideEdit);
+        $(document).on('click', '#tags .tag .btn.save', self.renameTag);
 
         self.initialized = true;
         self.loadTags();
@@ -59,21 +59,40 @@ function Tags() {
             $container = $this.parents('.tag.row'),
             title = $container.find('.title').text();
         $container.find('.title-edit').show();
-        $container.find('input[name=title]').val(title);
+        $container.find('input[name=title]').val(title).focus();
         $container.find('.title-container, .btn.edit, .btn.remove').hide();
     };
 
-    self.hideEdit = function() {
-        var $this = $(this), 
+    self.hideEdit = function(elem) {
+        var $this = typeof(elem) === 'undefined' ? $(this) : elem, 
             $container = $this.parents('.tag.row');
         $container.find('.title-edit').hide();
         $container.find('.title-container, .btn.edit, .btn.remove').show();
     };
 
+    self.renameTag = function() {
+        var $this = $(this), 
+            $container = $this.parents('.tag.row'),
+            title = $container.find('.title').text(),
+            newTitle = $container.find('input[name=title]').val(),
+            params = { title: title, newTitle: newTitle };
+        
+        // Don't send update request if no name change
+        if (newTitle === title) {
+            self.hideEdit($this);
+            return;
+        }
+
+        $.post('/tags', params).success(function(data, status) {
+            console.log(data, status);
+            $container.find('.title').text(newTitle);
+            self.hideEdit($this);
+        });
+
+    };
+
     self.loadTags = function() {
         $.getJSON('/tags').success(function(data) {
-            console.log(data);
-
             $.each(data, function(i, item) {
                 var $view = HTML.createTag(item);
                 self.$ul.append($view);

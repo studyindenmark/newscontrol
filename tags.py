@@ -13,6 +13,8 @@ import utils
 from google.appengine.ext.webapp import util
 from model import Tag
 
+import logging
+
 class TagsHandler(webapp2.RequestHandler):
     def get(self):
         """Gets the tags for the logged in user"""
@@ -35,6 +37,7 @@ class TagsHandler(webapp2.RequestHandler):
         """Creates a new tag for the logged in user"""
         user = utils.get_current_user_model()
         title = self.request.get('title')
+        new_title = self.request.get('newTitle') or None
         
         if not user:
             self.error(403)
@@ -43,13 +46,40 @@ class TagsHandler(webapp2.RequestHandler):
         if not title:
             self.error(400)
 
-        m = Tag(
-            parent=user.key(),
-            title=title,
-            title_lower=title.lower(),
-        )
-        m.put()
-        
+        # Create new tag
+        if not new_title:
+            m = Tag.all().ancestor(user.key()).filter('title_lower =', title.lower()).get()
+            
+            if m:
+                # Not unique
+                self.error(409)
+                return
+
+            m = Tag(
+                parent=user.key(),
+                title=title,
+                title_lower=title.lower(),
+            )
+            m.put()
+
+        # Rename Tag
+        else:
+            m = Tag.all().ancestor(user.key()).filter('title_lower =', new_title.lower()).get()
+            if m:
+                # Not unique
+                self.error(409)
+                return
+
+            m = Tag.all().ancestor(user.key()).filter('title_lower =', title.lower()).get()
+            if not m:
+                # Original tag not found
+                self.error(404)
+                return
+
+            m.title = new_title
+            m.title_lower = new_title.lower()
+            m.save()
+
         self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         self.response.out.write('ok')
