@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>{{title}}</title>
+    <link>{{url}}/</link>
+    <description>{{title}}</description>
+
+    {% for entry in entries %}
+    <item>
+      <title>{{entry.title}}</title>
+      <pubDate>{{entry.time_published_rss}}</pubDate>
+      <dc:creator>{{entry.creator}}</dc:creator>
+      <link>{{entry.link}}</link>
+      <guid isPermaLink="true">{{entry.id}}</guid>
+      <description><![CDATA[{{entry.content}}]]></description>
+    </item>
+    {% endfor %}
+
+  </channel>
+</rss>
