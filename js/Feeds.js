@@ -21,6 +21,8 @@ function Feeds() {
 
             $.post('/feeds', params).success(function(data) {
                 console.log('feed added', data);
+                var $view = HTML.createFeed(data);
+                self.$ul.append($view);
             });
         });
         
