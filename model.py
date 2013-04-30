@@ -64,6 +64,7 @@ class InputFeed(db.Model):
 
     def to_struct(self):
         return {
+            'id': self.key().id(),
             'title': self.title,
 			'logo': self.logo,
             'url': self.url,
