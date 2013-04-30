@@ -51,6 +51,7 @@ class InputFeed(db.Model):
             published = datetime.datetime(*tuple[:6])
             if fetch_all or (published > self.time_fetched):
                 m = Entry(
+                    guid=entry.get('guid'),
                     parent=self,
                     user=self.parent(),
                     #content=entry.get('content'),
@@ -73,6 +74,7 @@ class InputFeed(db.Model):
 
 class Entry(db.Model):
     #parent(InputFeed)
+    guid = db.StringProperty()
     title = db.StringProperty()
     content = db.TextProperty()
     link = db.TextProperty()
