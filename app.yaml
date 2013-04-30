@@ -36,6 +36,10 @@ handlers:
 - url: /me
   script: me.app
 
+- url: /cron/fetch_feeds.*
+  script: cron.app
+  login: admin
+
 - url: /
   static_files: index.html
   upload: index.html
