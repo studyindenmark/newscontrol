@@ -27,6 +27,9 @@ handlers:
 - url: /tags
   script: tags.app
 
+- url: /tags/.*
+  script: tags.app
+
 - url: /news
   script: news.app
 

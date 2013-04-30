@@ -12,6 +12,7 @@ import utils
 
 from google.appengine.ext.webapp import util
 from model import Tag
+from model import Entry
 
 import logging
 
@@ -84,6 +85,36 @@ class TagsHandler(webapp2.RequestHandler):
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         self.response.out.write('ok')
 
+class DeleteTagsHandler(webapp2.RequestHandler):
+    def delete(self, title):
+        """Delete the specified tag for the current user"""
+        user = utils.get_current_user_model()
+        
+        if not user:
+            self.error(403)
+            return
+            
+        m = Tag.all().ancestor(user.key()).filter('title_lower =', title.lower()).get()
+        if not m:
+            # Original tag not found
+            self.error(404)
+            return
+
+        entries = Entry.all().filter('tags =', m.key())
+
+        # Remove tag from entries
+        for entry in entries:
+            logging.info(entry)
+            entry.tags.remove(m.key())
+            entry.save()
+        
+        m.delete()
+
+        self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
+        self.response.headers['Access-Control-Allow-Origin'] = '*'
+        self.response.out.write('ok')
+
 app = webapp2.WSGIApplication([
     ('/tags', TagsHandler),
+    ('/tags/(.*)', DeleteTagsHandler),
 ], debug=True)
