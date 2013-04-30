@@ -2,6 +2,9 @@ from google.appengine.ext import db
 from google.appengine.api import users
 from time import mktime
 
+import datetime
+import feedparser
+
 class User(db.Model):
     google_user = db.UserProperty()
     nickname = db.StringProperty()
@@ -32,9 +35,33 @@ class InputFeed(db.Model):
     url = db.StringProperty()
     time_fetched = db.DateTimeProperty(auto_now_add=True)
     deleted = db.BooleanProperty()
-
-    def fetch_entries(self):
-        return []
+    
+    def fetch_entries(self, fetch_all):
+        """Fetches new entries
+        
+        If fetch_all is set to true, all entries will be fetched, regardless
+        if their published date is before the last time this feed was fetched.
+        """
+        parsed_feed = feedparser.parse(self.url)
+        entries = parsed_feed.get('entries')
+        
+        for entry in entries:
+            # http://pythonhosted.org/feedparser/date-parsing.html
+            tuple = entry['published_parsed']
+            published = datetime.datetime(*tuple[:6])
+            if fetch_all or (published > self.time_fetched):
+                m = Entry(
+                    parent=self,
+                    id=entry.get('id'),
+                    user=self.parent(),
+                    #content=entry.get('content'),
+                    title=entry.get('title'),
+                    time_published=published,
+                )
+                m.put()
+            
+        self.time_fetched = datetime.datetime.utcnow()
+        self.save()
 
     def to_struct(self):
         return {
