@@ -93,6 +93,7 @@ class Entry(db.Model):
     		'content': self.content,
             'link': self.link,
             'time_published': mktime(self.time_published.timetuple()),
+            'time_published_rss': self.time_published.strftime("%a, %d %b %Y %H:%M:%S GMT"), #Fri, 26 Apr 2013 06:57:55 GMT
             'published': self.published,
             'tags': tags,
         }
