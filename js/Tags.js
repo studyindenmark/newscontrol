@@ -10,6 +10,8 @@ function Tags() {
         $('#tags .add input[name=title]')
             .keydown(self.titleKeyDown)
             .keyup(self.titleKeyUp);
+        $(document).on('click', '#tags .tag .btn.edit', self.showEdit);
+        $(document).on('click', '#tags .tag .btn.save', self.hideEdit);
 
         self.initialized = true;
         self.loadTags();
@@ -50,6 +52,22 @@ function Tags() {
         } else {
             $('#tags .btn.add').removeClass('disabled').removeAttr('disabled');
         }
+    };
+
+    self.showEdit = function() {
+        var $this = $(this), 
+            $container = $this.parents('.tag.row'),
+            title = $container.find('.title').text();
+        $container.find('.title-edit').show();
+        $container.find('input[name=title]').val(title);
+        $container.find('.title-container, .btn.edit, .btn.remove').hide();
+    };
+
+    self.hideEdit = function() {
+        var $this = $(this), 
+            $container = $this.parents('.tag.row');
+        $container.find('.title-edit').hide();
+        $container.find('.title-container, .btn.edit, .btn.remove').show();
     };
 
     self.loadTags = function() {
