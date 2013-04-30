@@ -52,7 +52,6 @@ class InputFeed(db.Model):
             if fetch_all or (published > self.time_fetched):
                 m = Entry(
                     parent=self,
-                    id=entry.get('id'),
                     user=self.parent(),
                     #content=entry.get('content'),
                     title=entry.get('title'),
@@ -73,7 +72,6 @@ class InputFeed(db.Model):
 
 class Entry(db.Model):
     #parent(InputFeed)
-    id = db.StringProperty()
     title = db.StringProperty()
     content = db.TextProperty()
     link = db.TextProperty()
@@ -89,7 +87,7 @@ class Entry(db.Model):
                 tags.append(tag.to_struct())
         
         return {
-            'id': self.id,
+            'id': self.key().id(),
             'title': self.title,
     		'content': self.content,
             'link': self.link,
