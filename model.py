@@ -51,7 +51,7 @@ class Entry(db.Model):
     content = db.TextProperty()
     link = db.TextProperty()
     time_published = db.DateTimeProperty()
-    published = db.BooleanProperty()
+    published = db.BooleanProperty(default=False)
     tags = db.ListProperty(db.Key)
     user = db.ReferenceProperty(reference_class=User)
 
