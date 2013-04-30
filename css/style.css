@@ -45,9 +45,9 @@ input[type="text"].input-low {
    margin: 0;
 }
 
-.entry.published .btn.publish {
-    display: none;
-}
+.entry.published .btn.publish { display: none; }
+.entry .btn.unpublish { display: none; }
+.entry.published .btn.unpublish { display: block; }
 
 .entry-list, .feeds-list {
     margin: 0;

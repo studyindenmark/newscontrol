@@ -44,7 +44,7 @@ class SpecificEntryHandler(webapp2.RequestHandler):
         published = self.request.get('published')
         
         if published != None:
-            entry.published = bool(published)
+            entry.published = bool(int(published))
             entry.save()
         
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'

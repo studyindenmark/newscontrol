@@ -10,16 +10,15 @@ function News(newsControl) {
     self.init = function() {
         self.initialized = true;
         self.loadFeeds();
-        $(document).on('click', '#news .btn.publish', self.publishEntryCallback);
+        $(document).on('click', '#news .btn.publish', self.togglePublishedCallback);
+        $(document).on('click', '#news .btn.unpublish', self.togglePublishedCallback);
     };
     
-    self.publishEntryCallback = function() {
+    self.togglePublishedCallback = function() {
         var $this = $(this), 
             $container = $this.parents('li.entry'),
             feedId = $container.data('feedId'),
             modelId = $container.data('modelId');
-            
-        console.log('publishing feed entry', modelId);
         
         var url = '/$USER_ID/feeds/$FEED_ID/entries/$ENTRY_ID';
         
@@ -28,12 +27,16 @@ function News(newsControl) {
         url = url.replace('$ENTRY_ID', modelId);
         
         var params = {
-            published: 1
+            published: $container.hasClass('published') ? 0 : 1,
         };
         
         $.post(url, params).success(function(data) {
-            console.log('toggled publish for entry', data);
-            $container.addClass('published');
+            console.log('toggled publish for entry', data.published, data);
+            if (data.published) {
+                $container.addClass('published');
+            } else {
+                $container.removeClass('published');
+            }
         });
     };
     
