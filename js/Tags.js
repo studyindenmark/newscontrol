@@ -1,6 +1,7 @@
-function Tags() {
+function Tags(newsControl) {
     var self = this;
 
+    self.newsControl = newsControl;
 	self.initialized = false;
     self.$view = $("#tags");
     self.$ul = self.$view.find('> ul');

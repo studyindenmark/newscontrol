@@ -9,7 +9,7 @@ var HTML = {
         return $clone;
     },
     
-    createEntry: function(data) {
+    createEntry: function(data, tags_autocomplete) {
         var $clone = $('.template.entry').clone(true);
         
         $clone.data('modelId', data.id);
@@ -23,6 +23,7 @@ var HTML = {
         
         $clone.find('.title').text(data.title);
         $clone.find('.url').attr('href', data.url).text(data.url);
+        $clone.find('input.tag').attr('data-source', tags_autocomplete);
         return $clone;
     },
 

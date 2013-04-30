@@ -1,9 +1,11 @@
-function News() {
+function News(newsControl) {
     var self = this;
     
+    self.newsControl = newsControl;
     self.initialized = false;
     self.$view = $("#news");
     self.$ul = self.$view.find('> ul');
+    self.tagsList = [];
 
     self.init = function() {
         self.initialized = true;
@@ -36,11 +38,18 @@ function News() {
     };
     
     self.loadFeeds = function() {
-        $.getJSON('/news').success(function(data) {
-            console.log('news loaded', data);
+        // Get tags so we can autocomplete them
+        $.getJSON('/tags').success(function(data) {
             $.each(data, function(i, item) {
-                var $view = HTML.createEntry(item);
-                self.$ul.append($view);
+                self.tagsList.push(item.title);
+            });
+
+            $.getJSON('/news').success(function(data) {
+                console.log('news loaded', data);
+                $.each(data, function(i, item) {
+                    var $view = HTML.createEntry(item, JSON.stringify(self.tagsList));
+                    self.$ul.append($view);
+                });
             });
         });
     };
