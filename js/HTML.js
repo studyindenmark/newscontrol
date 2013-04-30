@@ -10,8 +10,17 @@ var HTML = {
     },
     
     createEntry: function(data) {
-        var $clone = $('.template.news').clone(true);
+        var $clone = $('.template.entry').clone(true);
+        
+        $clone.data('modelId', data.id);
+        $clone.data('feedId', data.feed_id);
+        
         $clone.removeClass('template');
+        
+        if (data.published) {
+            $clone.addClass('published');
+        }
+        
         $clone.find('.title').text(data.title);
         $clone.find('.url').attr('href', data.url).text(data.url);
         return $clone;

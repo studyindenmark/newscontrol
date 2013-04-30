@@ -45,6 +45,10 @@ input[type="text"].input-low {
    margin: 0;
 }
 
+.entry.published .btn.publish {
+    display: none;
+}
+
 .entry-list, .feeds-list {
     margin: 0;
 }

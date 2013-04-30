@@ -89,6 +89,7 @@ class Entry(db.Model):
         
         return {
             'id': self.key().id(),
+            'feed_id': self.parent().key().id(),
             'title': self.title,
     		'content': self.content,
             'link': self.link,
