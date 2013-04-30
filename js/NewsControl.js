@@ -15,17 +15,17 @@ function NewsControl() {
             switch (r.status) {
                 case 403:
                     // Logged out
-                    self.showLoginModal();
+                    Modal.showLogin();
                     break;
                 case 404:
-                    self.showInformationModal('A resource cannot be found (' + ajaxOptions.url + ')');
+                    Modal.showInformation('A resource cannot be found (' + ajaxOptions.url + ')');
                     break;
                 case 409:
-                    self.showInformationModal('The item is not unique.');
+                    Modal.showInformation('The item is not unique.');
                     break;
                 case 500:
                     // Server error
-                    self.showErrorModal(r.responseText);
+                    Modal.showError(r.responseText);
                     break;
             }
         });
@@ -36,31 +36,5 @@ function NewsControl() {
         self.tags = new Tags();
         self.user = new User();
         self.topBar = new TopBar(self);
-    };
-
-    self.showLoginModal = function() {
-        $('#loginModal').modal({
-            backdrop: 'static',
-            keyboard: true,
-            show: true
-        });
-    };
-
-    self.showErrorModal = function(message) {
-        $('#errorModal .message').html(message);
-        $('#errorModal').modal({
-            backdrop: 'static',
-            keyboard: true,
-            show: true
-        });
-    };
-
-    self.showInformationModal = function(message) {
-        $('#infoModal .message').html(message);
-        $('#infoModal').modal({
-            backdrop: 'static',
-            keyboard: true,
-            show: true
-        });
     };
 }
