@@ -11,7 +11,45 @@ import feedparser
 import utils
 
 from google.appengine.ext.webapp import util
+from google.appengine.api import users
+
 from model import InputFeed
+from model import User
+
+class SpecificFeedHandler(webapp2.RequestHandler):
+    def delete(self, user_id, model_id):
+        """Deletes a specific feed"""
+        current_user = utils.get_current_user_model()
+        
+        if not current_user:
+            self.error(403)
+            return
+        
+        user = User.get_by_id(int(user_id))
+        
+        if user == None:
+            self.error(404)
+            return
+        
+        if current_user != user and not users.is_current_user_admin():
+            self.error(401)
+            return
+        
+        m = InputFeed.get_by_id(int(model_id), parent=user.key())
+        
+        if m == None:
+            self.error(404)
+            return
+        
+        m.deleted = True
+        m.save()
+        
+        self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
+        self.response.headers['Access-Control-Allow-Origin'] = '*'
+        #self.response.out.write(json.dumps(m.to_struct()))
+        self.response.out.write(json.dumps({
+            'id': model_id,
+        }))
 
 class FeedsHandler(webapp2.RequestHandler):
     def get(self):
@@ -22,7 +60,7 @@ class FeedsHandler(webapp2.RequestHandler):
             self.error(403)
             return
             
-        feeds = InputFeed.all().ancestor(user.key())
+        feeds = InputFeed.all().ancestor(user.key()).filter('deleted =', False)
             
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
@@ -69,5 +107,6 @@ class FeedsHandler(webapp2.RequestHandler):
         self.response.out.write(json.dumps(m.to_struct()))
 
 app = webapp2.WSGIApplication([
+    ('/(.*)/feeds/(.*)', SpecificFeedHandler),
     ('/feeds', FeedsHandler),
 ], debug=True)

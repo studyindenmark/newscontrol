@@ -21,6 +21,9 @@ handlers:
 - url: /feeds
   script: feeds.app
 
+- url: /.*/feeds/.*
+  script: feeds.app
+  
 - url: /tags
   script: tags.app
 

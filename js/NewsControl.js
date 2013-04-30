@@ -32,7 +32,7 @@ function NewsControl() {
 
         // Setup user, news, feeds and tags
         self.news = new News();
-        self.feeds = new Feeds();
+        self.feeds = new Feeds(self);
         self.tags = new Tags();
         self.user = new User();
         self.topBar = new TopBar(self);

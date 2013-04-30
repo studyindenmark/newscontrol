@@ -1,4 +1,4 @@
-function Feeds() {
+function Feeds(newsControl) {
     var self = this;
     
     self.initialized = false;
@@ -26,12 +26,34 @@ function Feeds() {
             });
         });
         
+        $(document).on('click', '#feeds .btn.remove', self.removeFeedCallback);
+        
         self.loadFeeds();
         self.initialized = true;
     };
     
+    self.removeFeedCallback = function() {
+        var $this = $(this), 
+            $container = $this.parents('li.feed'),
+            modelId = $container.data('modelId');
+            
+        console.log('removing', modelId);
+        
+        $.ajax({
+            type: 'DELETE',
+            url: '/' + newsControl.user.id + '/feeds/' + modelId,
+            statusCode: {
+                200: function(data) {
+                    console.log('feed removed', data);
+                    $container.fadeOut();
+                }
+            }
+        });
+    };
+    
     self.loadFeeds = function() {
         $.getJSON('/feeds').success(function(data) {
+            console.log('feeds fetched', data);
             $.each(data, function(i, item) {
                 var $view = HTML.createFeed(item);
                 self.$ul.append($view);
