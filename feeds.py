@@ -62,6 +62,7 @@ class FeedsHandler(webapp2.RequestHandler):
         )
         
         m.put()
+        m.fetch_entries(fetch_all=True)
         
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
