@@ -91,7 +91,7 @@ class Entry(db.Model):
         return {
             'id': self.id,
             'title': self.title,
-            'content': self.summary,
+    		'content': self.content,
             'link': self.link,
             'time_published': mktime(self.time_published.timetuple()),
             'published': self.published,
