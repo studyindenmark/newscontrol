@@ -34,7 +34,7 @@ class InputFeed(db.Model):
     logo = db.StringProperty()
     url = db.StringProperty()
     time_fetched = db.DateTimeProperty(auto_now_add=True)
-    deleted = db.BooleanProperty()
+    deleted = db.BooleanProperty(default=False)
     
     def fetch_entries(self, fetch_all):
         """Fetches new entries
