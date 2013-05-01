@@ -18,7 +18,7 @@ class NewsHandler(webapp2.RequestHandler):
             self.error(403)
             return
             
-        entries = Entry.all().ancestor(user.key())
+        entries = Entry.all().ancestor(user)
             
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'

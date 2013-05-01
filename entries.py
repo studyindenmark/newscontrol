@@ -33,13 +33,13 @@ class SpecificEntryHandler(webapp2.RequestHandler):
             self.error(401)
             return
         
-        feed = InputFeed.get_by_id(int(feed_id), parent=user.key())
+        feed = InputFeed.get_by_id(int(feed_id), parent=user)
         
         if feed == None:
             self.error(404)
             return
         
-        entry = Entry.get_by_id(int(entry_id), parent=feed.key())
+        entry = Entry.get_by_id(int(entry_id), parent=feed)
         
         published = self.request.get('published')
         

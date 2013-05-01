@@ -25,7 +25,7 @@ class TagsHandler(webapp2.RequestHandler):
             self.error(403)
             return
             
-        tags = Tag.all().ancestor(user.key())
+        tags = Tag.all().ancestor(user)
             
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
@@ -49,7 +49,7 @@ class TagsHandler(webapp2.RequestHandler):
 
         # Create new tag
         if not new_title:
-            m = Tag.all().ancestor(user.key()).filter('title_lower =', title.lower()).get()
+            m = Tag.all().ancestor(user).filter('title_lower =', title.lower()).get()
             
             if m:
                 # Not unique
@@ -57,7 +57,7 @@ class TagsHandler(webapp2.RequestHandler):
                 return
 
             m = Tag(
-                parent=user.key(),
+                parent=user,
                 title=title,
                 title_lower=title.lower(),
             )
@@ -65,13 +65,13 @@ class TagsHandler(webapp2.RequestHandler):
 
         # Rename Tag
         else:
-            m = Tag.all().ancestor(user.key()).filter('title_lower =', new_title.lower()).get()
+            m = Tag.all().ancestor(user).filter('title_lower =', new_title.lower()).get()
             if m:
                 # Not unique
                 self.error(409)
                 return
 
-            m = Tag.all().ancestor(user.key()).filter('title_lower =', title.lower()).get()
+            m = Tag.all().ancestor(user).filter('title_lower =', title.lower()).get()
             if not m:
                 # Original tag not found
                 self.error(404)
@@ -94,7 +94,7 @@ class DeleteTagsHandler(webapp2.RequestHandler):
             self.error(403)
             return
             
-        m = Tag.all().ancestor(user.key()).filter('title_lower =', title.lower()).get()
+        m = Tag.all().ancestor(user).filter('title_lower =', title.lower()).get()
         if not m:
             # Original tag not found
             self.error(404)

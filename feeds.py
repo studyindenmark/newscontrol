@@ -35,7 +35,7 @@ class SpecificFeedHandler(webapp2.RequestHandler):
             self.error(401)
             return
         
-        m = InputFeed.get_by_id(int(model_id), parent=user.key())
+        m = InputFeed.get_by_id(int(model_id), parent=user)
         
         if m == None:
             self.error(404)
@@ -60,7 +60,7 @@ class FeedsHandler(webapp2.RequestHandler):
             self.error(403)
             return
             
-        feeds = InputFeed.all().ancestor(user.key()).filter('deleted =', False)
+        feeds = InputFeed.all().ancestor(user).filter('deleted =', False)
             
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
@@ -91,7 +91,7 @@ class FeedsHandler(webapp2.RequestHandler):
             content = feed.get('content').get('value')
             
         m = InputFeed(
-            parent=user.key(),
+            parent=user,
             logo=logo,
             url=url,
             title=title,
