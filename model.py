@@ -29,6 +29,9 @@ class InviteToken(db.Model):
     email = db.StringProperty()
     token = db.StringProperty()
     
+    # The user who initiated the invite process
+    sender = db.Key()
+    
     # If set, this indicates that the invite code has been used
     user_signed_up = db.ReferenceProperty(reference_class=User)
 

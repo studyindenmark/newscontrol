@@ -35,8 +35,12 @@ class SignupHandler(webapp2.RequestHandler):
             self.error(500)
             return
         
-        m.user_signed_up = utils.create_user(users.get_current_user())
+        new_user = users.get_current_user()
+        
+        m.user_signed_up = new_user
         m.save()
+        
+        sender = db.get(m.sender)
         
         self.redirect('/')
         
