@@ -11,7 +11,7 @@ from config import MAIL_SENDER
 # GAE developer doc: https://developers.google.com/appengine/docs/python/mail/
 
 INVITATION_TEMPLATE =  """
-You have been invited to to News Control.
+You have been invited to News Control.
 
 $link
 
