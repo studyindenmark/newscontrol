@@ -13,6 +13,7 @@ function User() {
         self.id = data.id;
         self.nickname = data.nickname;
         self.email = data.email;
+        self.isAdmin = data.is_admin;
         $('.dropdown.user .username').text(self.email);
         $('.dropdown.user').show();
         

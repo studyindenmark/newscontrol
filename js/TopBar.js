@@ -2,6 +2,11 @@ function TopBar(newsControl) {
     var self = this;
     
     self.init = function() {
+        $(document).bind('me_loaded', function() {
+            if (!newsControl.user.isAdmin) {
+                $('.dropdown-menu .invite').hide();
+            }
+        });
     };
 
     self.changeTab = function(tabName) {

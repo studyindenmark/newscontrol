@@ -27,9 +27,12 @@ class MeHandler(webapp2.RequestHandler):
                 self.error(401)
                 return
         
+        data = user.to_struct()
+        data['is_admin'] = users.is_current_user_admin()
+        
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
-        self.response.out.write(json.dumps(user.to_struct()))
+        self.response.out.write(json.dumps(data))
 
 app = webapp2.WSGIApplication([
     ('/me', MeHandler),
