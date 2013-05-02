@@ -73,6 +73,9 @@ function News(newsControl) {
             modelId = $container.data('modelId'),
             tag_title = $container.find('input.tag').val();
         
+        if (tag_title.length === 0) {
+            return;
+        }
         var url = '/feeds/$FEED_ID/entries/$ENTRY_ID/tags/$TAG_TITLE';
         
         url = url.replace('$FEED_ID', feedId);
