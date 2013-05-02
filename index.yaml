@@ -50,6 +50,13 @@ indexes:
   ancestor: yes
   properties:
   - name: language
+  - name: time_published
+    direction: desc
+
+- kind: Entry
+  ancestor: yes
+  properties:
+  - name: language
   - name: title
 
 - kind: Entry
