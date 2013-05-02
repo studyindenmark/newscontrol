@@ -13,8 +13,10 @@ class SignupHandler(webapp2.RequestHandler):
     def get(self):
         """Crete a new User using an InviteToken"""
         
+        token = self.request.get('token')
+        
         if not users.get_current_user():
-            url = users.create_login_url()
+            url = users.create_login_url('/signup?token=%s' % token)
             self.redirect(url)
             return
         
@@ -22,8 +24,6 @@ class SignupHandler(webapp2.RequestHandler):
             # User is already logged in
             self.redirect('/')
             return
-        
-        token = self.request.get('token')
     
         m = InviteToken.all().filter('token =', token).get()
         
