@@ -33,11 +33,13 @@ var HTML = {
         return $clone;
     },
 
-    createTag: function(data) {
-        var $clone = $('.template.tag').clone(true);
+    createTag: function(data, user_id) {
+        var $clone = $('.template.tag').clone(true),
+            link = '/'+ user_id + '/' + data.title + '.rss';
         $clone.removeClass('template');
         $clone.find('.title').text(data.title);
         $clone.find('.badge').text(data.entry_count);
+        $clone.find('.feed-link').text(link).attr('href', link).attr('_target', 'top');
         return $clone;
     },
 

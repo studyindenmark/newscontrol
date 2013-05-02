@@ -111,7 +111,7 @@ function Tags(newsControl) {
     self.loadTags = function() {
         $.getJSON('/tags').success(function(data) {
             $.each(data, function(i, item) {
-                var $view = HTML.createTag(item);
+                var $view = HTML.createTag(item, newsControl.user.id);
                 self.$ul.append($view);
             });
         });

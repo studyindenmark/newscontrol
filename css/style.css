@@ -87,3 +87,9 @@ input[type="text"].input-low {
 .tags-list .badge {
     margin: 10px 5px 0 5px;
 }
+
+.tags-list .feed-link {
+    margin-top: 8px;
+    margin-left: 10px;
+    display: inline-block;
+}
