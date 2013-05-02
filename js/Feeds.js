@@ -1,6 +1,8 @@
 function Feeds(newsControl) {
     var self = this;
     
+    var loadingBar = newsControl.loadingBar;
+    
     self.initialized = false;
     self.$view = $("#feeds");
     self.$ul = self.$view.find('> ul');
@@ -18,11 +20,15 @@ function Feeds(newsControl) {
             var params = {
                 url: url
             };
+            
+            loadingBar.setPercent(10);
 
             $.post('/feeds', params).success(function(data) {
                 console.log('feed added', data);
                 var $view = HTML.createFeed(data);
                 self.$ul.append($view);
+            }).complete(function() {
+                loadingBar.setPercent(100);
             });
         });
         
@@ -39,6 +45,8 @@ function Feeds(newsControl) {
             
         console.log('removing', modelId);
         
+        loadingBar.setPercent(10);
+        
         $.ajax({
             type: 'DELETE',
             url: '/' + newsControl.user.id + '/feeds/' + modelId,
@@ -47,6 +55,9 @@ function Feeds(newsControl) {
                     console.log('feed removed', data);
                     $container.fadeOut();
                 }
+            },
+            complete: function() {
+                loadingBar.setPercent(100);
             }
         });
     };
