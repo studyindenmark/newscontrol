@@ -5,6 +5,7 @@ var HTML = {
         $clone.data('modelId', data.id);
         $clone.removeClass('template');
         $clone.find('.title').text(data.title);
+        $clone.find('.feed-logo').attr('src', data.logo);
         $clone.find('.url').attr('href', data.url).text(data.url);
         $clone.find('select.language').val(data.language);
         return $clone;
