@@ -24,6 +24,7 @@ function Feeds(newsControl) {
 
             $.post('/feeds', params).success(function(data) {
                 console.log('feed added', data);
+                loadingBar.setPercent(50);
                 var $view = HTML.createFeed(data);
                 self.$ul.append($view);
             }).complete(function() {
