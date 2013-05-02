@@ -43,7 +43,8 @@
     padding: 5px;
 }
 
-#news .sorting .nav {
+#news .sort select,
+#news .filter select {
     margin-bottom: 0;
 }
 
