@@ -23,7 +23,7 @@ var HTML = {
             $clone.addClass('published');
         }
         
-        $clone.find('.title').text(data.title);
+        $clone.find('.title').text(data.title).append($('<span class="caret"></span>'));
         $clone.find('.content').html(data.content);
         $clone.find('.url').attr('href', data.url).text(data.url);
         $clone.find('.feed-logo').attr('src', data.feed_logo);
