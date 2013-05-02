@@ -19,7 +19,7 @@ import logging
 class TagsHandler(webapp2.RequestHandler):
     def get(self):
         """Gets the tags for the logged in user"""
-        user = utils.get_current_user_model()
+        user = utils.get_or_create_current_user()
         
         if not user:
             self.error(403)
@@ -36,7 +36,7 @@ class TagsHandler(webapp2.RequestHandler):
         
     def post(self):
         """Creates a new tag for the logged in user"""
-        user = utils.get_current_user_model()
+        user = utils.get_or_create_current_user()
         title = self.request.get('title')
         new_title = self.request.get('newTitle') or None
         
@@ -88,7 +88,7 @@ class TagsHandler(webapp2.RequestHandler):
 class DeleteTagsHandler(webapp2.RequestHandler):
     def delete(self, title):
         """Delete the specified tag for the current user"""
-        user = utils.get_current_user_model()
+        user = utils.get_or_create_current_user()
         
         if not user:
             self.error(403)

@@ -8,8 +8,12 @@ def create_user(google_user):
     user.put()
     return user
 
-def get_current_user_model():
-    return get_user_model_for(users.get_current_user())
+def get_or_create_current_user():
+    google_user = users.get_current_user()
+    user = get_user_model_for(google_user)
+    if not user and users.is_current_user_admin():
+        user = create_user(google_user)
+    return user
 
 def get_user_model_for(google_user=None):
     return User.all().filter('google_user =', google_user).get()
