@@ -34,6 +34,9 @@ function NewsControl() {
         });
 
         // Setup user, news, feeds and tags
+        
+        Modal.init(self);
+        
         self.loadingBar = new LoadingBar();
         self.news = new News(self);
         self.feeds = new Feeds(self);

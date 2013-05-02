@@ -45,4 +45,9 @@ function TopBar(newsControl) {
         var tabName = $(this).attr('rel');
         self.changeTab(tabName);
     });
+    
+    $('a.invite-user').click(function() {
+        Modal.showInvite();
+    });
+
 }

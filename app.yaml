@@ -51,6 +51,9 @@ handlers:
 - url: /logout
   script: logout.app
 
+- url: /invite
+  script: invite.app
+
 - url: /me
   script: me.app
 
