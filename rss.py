@@ -28,7 +28,7 @@ class RSSHandler(webapp2.RequestHandler):
             self.error(404)
             return
 
-        entries = Entry.all().filter('tags =', tag.key()).filter('published =', True).fetch(20)
+        entries = Entry.all().filter('tags =', tag.key()).filter('published =', True).order('-time_published').fetch(20)
         entries = [e.to_struct() for e in entries]
             
         path = os.path.join(os.path.dirname(__file__), 'template.rss')
