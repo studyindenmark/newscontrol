@@ -35,6 +35,10 @@ var HTML = {
         $clone.find('.title').text(data.title);
         $clone.find('.badge').text(data.entry_count);
         return $clone;
+    },
+
+    createInlineTag: function(title) {
+        return $('a class="tag label label-info" href="void(0);">' + title + '</a>');
     }
     
 };
