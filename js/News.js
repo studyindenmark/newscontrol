@@ -17,6 +17,11 @@ function News(newsControl) {
         $(document).on('keydown', '#news input.tag', self.tagKeyDown);
         $(document).on('click', '#news .tags a.tag', self.untagEntry);
         $(document).on('click', '#news .entry .title', self.togglePost);
+        
+        $(document).on('change', '#news select.sorting', self.loadSortedEntries);
+        $(document).on('change', '#news select.sorting-order', self.loadSortedEntries);
+        $(document).on('change', '#news select.sorting-tags', self.loadSortedEntries);
+        $(document).on('change', '#news select.language-tags', self.loadSortedEntries);
     };
 
     self.togglePost = function() {
@@ -100,8 +105,28 @@ function News(newsControl) {
             $this.remove();
         });
     };
+
+    self.loadSortedEntries = function() {
+        var $this = $(this),
+            $parent = $this.parents('.sort'),
+            $sorting = $parent.find('.sorting'),
+            $sortingOrder = $parent.find('.sorting-order'),
+            $sortingTags = $parent.find('.sorting-tags'),
+            $sortingLanguage = $parent.find('.sorting-language'),
+            order = $sorting.val().toLowerCase() + '-' + $sortingOrder.val().toLowerCase(),
+            tag = $sortingTags.val().toLowerCase(),
+            lang = $sortingLanguage.val().toLowerCase(),
+            query = '?order=' + order;
+        if (tag !== 'all tags') {
+            query += '&tag=' + tag;
+        }
+        if (lang !== 'all languages') {
+            query += '&lang=' + lang;
+        }
+        self.loadEntries(query);
+    };
     
-    self.loadEntries = function() {
+    self.loadEntries = function(query) {
         // Get tags so we can autocomplete them
         
         self.$ul.find('.entry').not('.template').remove();
@@ -115,7 +140,11 @@ function News(newsControl) {
                 self.tagsList.push(item.title);
             });
 
-            $.getJSON('/news').success(function(data) {
+            var url = '/news';
+            if (query) {
+                url += query;
+            }
+            $.getJSON(url).success(function(data) {
                 loadingBar.setPercent(100);
                 
                 console.log('news loaded', data);

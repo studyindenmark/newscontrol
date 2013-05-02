@@ -9,6 +9,8 @@ from google.appengine.ext.webapp import util
 from model import InputFeed
 from model import Entry
 
+import logging
+
 class NewsHandler(webapp2.RequestHandler):
     def get(self):
         """Gets all entries from all feeds this user subscribes to"""
@@ -19,6 +21,20 @@ class NewsHandler(webapp2.RequestHandler):
             return
             
         entries = Entry.all().ancestor(user)
+
+        order = self.request.get('order')
+        logging.info(order)
+        if order:
+            if order == 'date-asc':
+                entries = entries.order('time_published')
+            elif order == 'date-desc':
+                entries = entries.order('-time_published')
+            elif order == 'title-asc':
+                entries = entries.order('title')
+            elif order == 'title-desc':
+                entries = entries.order('-title')
+
+        entries = entries.fetch(25)
             
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
