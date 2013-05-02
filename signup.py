@@ -30,7 +30,7 @@ class SignupHandler(webapp2.RequestHandler):
             self.error(404)
             return
         
-        if m.user:
+        if m.user_signed_up:
             self.error(500)
             return
         
