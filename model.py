@@ -49,9 +49,9 @@ class InputFeed(db.Model):
             # http://pythonhosted.org/feedparser/date-parsing.html
             tuple = entry['published_parsed']
             published = datetime.datetime(*tuple[:6])
-            content = entry.get('summary') # Yes, summary.
 
-            if 'content' in entry:
+            content = None
+            if len(entry.get('content', [])) > 0:
                 content = entry.get('content')[0].get('value')
                 
             if fetch_all or (published > self.time_fetched):
