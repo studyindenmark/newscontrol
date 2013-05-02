@@ -1,5 +1,6 @@
 import json
 import webapp2
+import uuid
 
 from google.appengine.ext.webapp import util
 from google.appengine.api import users
@@ -13,7 +14,7 @@ class InviteHandler(webapp2.RequestHandler):
         """Send an invitation mail to the provided email address"""
         
         email = self.request.get('email')
-        token = '123'
+        token = uuid.uuid1().hex
         
         mail.send_invite_email(email, token)
     
