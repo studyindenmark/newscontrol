@@ -15,6 +15,7 @@ function News(newsControl) {
         $(document).on('click', '#news .btn.publish', self.togglePublishedCallback);
         $(document).on('click', '#news .btn.unpublish', self.togglePublishedCallback);
         $(document).on('keydown', '#news input.tag', self.tagKeyDown);
+        $(document).on('click', '#news .tags a.tag', self.untagEntry);
     };
     
     self.togglePublishedCallback = function() {
@@ -68,6 +69,28 @@ function News(newsControl) {
         $.post(url).success(function(data) {
             console.log('Tagged entry', modelId, tag_title, data);
             HTML.createInlineTag(tag_title).insertBefore($container.find('input.tag'));
+        });
+    };
+
+    self.untagEntry = function(elem) {
+        var $this = $(this),
+            $container = $this.parents('li.entry'),
+            feedId = $container.data('feedId'),
+            modelId = $container.data('modelId'),
+            tag_title = $this.text();
+        
+        var url = '/feeds/$FEED_ID/entries/$ENTRY_ID/tags/$TAG_TITLE';
+        
+        url = url.replace('$FEED_ID', feedId);
+        url = url.replace('$ENTRY_ID', modelId);
+        url = url.replace('$TAG_TITLE', tag_title);
+        
+        $.ajax({
+            type: 'DELETE',
+            url: url
+        }).success(function(data) {
+            console.log('Tagged entry', modelId, tag_title, data);
+            $this.remove();
         });
     };
     

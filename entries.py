@@ -81,6 +81,7 @@ class TagEntryHandler(webapp2.RequestHandler):
         if not tag_title:
             logging.info('no tag_title provided found')
             self.error(400)
+            return
 
         tag = Tag.all().ancestor(current_user).filter('title_lower =', tag_title.lower()).get()
 
@@ -94,6 +95,47 @@ class TagEntryHandler(webapp2.RequestHandler):
             )
 
         tag.tag_entry(entry)
+        self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
+        self.response.headers['Access-Control-Allow-Origin'] = '*'
+        self.response.out.write('ok')
+
+    def delete(self, feed_id, entry_id, tag_title):
+        current_user = utils.get_current_user_model()
+        
+        if not current_user:
+            logging.info('no user logged in')
+            self.error(403)
+            return
+
+        logging.info(feed_id)
+        feed = InputFeed.get_by_id(int(feed_id), parent=current_user)
+
+        if not feed:
+            logging.info('no feed found')
+            self.error(404)
+            return
+
+        entry = Entry.get_by_id(int(entry_id), parent=feed)
+
+        if not entry:
+            logging.info('no entry found')
+            self.error(404)
+            return
+
+        if not tag_title:
+            logging.info('no tag_title provided found')
+            self.error(400)
+            return
+
+        tag = Tag.all().ancestor(current_user).filter('title_lower =', tag_title.lower()).get()
+
+        if not tag:
+            logging.info('no tag found')
+            self.error(404)
+            return
+
+        entry.tags.remove(tag.key())
+        entry.save()
         self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         self.response.out.write('ok')

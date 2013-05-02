@@ -44,7 +44,7 @@ var HTML = {
     },
 
     createInlineTag: function(title) {
-        return $('<a class="tag label label-info" href="void(0);">' + title + '</a>');
+        return $('<a class="tag label label-info" href="javascript:void(0);">' + title + '</a>');
     }
     
 };
