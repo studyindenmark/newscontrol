@@ -32,3 +32,32 @@ def get_user_model_by_id_or_nick(id_or_nick):
         return User.get_by_id(int(id_or_nick))
     else:
         return User.all().filter('nickname_lower = ', id_or_nick.lower()).get()
+    
+def copy_feeds_from_user(user1, user2):
+    """Copy subscriptions from user1 to user2"""
+    for feed in InputFeed.all().ancestor(user1):
+        new_feed = clone_entity(feed, parent=user2)
+        new_feed.put()
+        
+        # TODO: this does not scale
+        new_feed.fetch_entries()
+        
+# from http://stackoverflow.com/a/2712401/80880
+def clone_entity(e, **extra_args):
+  """Clones an entity, adding or overriding constructor attributes.
+
+  The cloned entity will have exactly the same property values as the original
+  entity, except where overridden. By default it will have no parent entity or
+  key name, unless supplied.
+
+  Args:
+    e: The entity to clone
+    extra_args: Keyword arguments to override from the cloned entity and pass
+      to the constructor.
+  Returns:
+    A cloned, possibly modified, copy of entity e.
+  """
+  klass = e.__class__
+  props = dict((k, v.__get__(e, klass)) for k, v in klass.properties().iteritems())
+  props.update(extra_args)
+  return klass(**props)

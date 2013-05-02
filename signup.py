@@ -2,6 +2,7 @@ import json
 import webapp2
 
 from google.appengine.ext.webapp import util
+from google.appengine.ext import db
 from google.appengine.api import users
 
 import mail
@@ -15,7 +16,9 @@ class SignupHandler(webapp2.RequestHandler):
         
         token = self.request.get('token')
         
-        if not users.get_current_user():
+        google_user = users.get_current_user()
+        
+        if not google_user:
             url = users.create_login_url('/signup?token=%s' % token)
             self.redirect(url)
             return
@@ -35,12 +38,14 @@ class SignupHandler(webapp2.RequestHandler):
             self.error(500)
             return
         
-        new_user = users.get_current_user()
+        new_user = utils.create_user(google_user)
         
         m.user_signed_up = new_user
         m.save()
         
         sender = db.get(m.sender)
+        
+        utils.copy_feeds_from_user(sender, new_user)
         
         self.redirect('/')
         
