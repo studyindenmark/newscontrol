@@ -11,6 +11,53 @@ indexes:
 # your application using appcfg.py.
 
 - kind: Entry
+  properties:
+  - name: language
+  - name: tags
+  - name: time_published
+
+- kind: Entry
+  properties:
+  - name: language
+  - name: tags
+  - name: title
+
+- kind: Entry
+  properties:
+  - name: published
+  - name: tags
+  - name: time_published
+    direction: desc
+
+- kind: Entry
+  properties:
+  - name: tags
+  - name: time_published
+
+- kind: Entry
+  properties:
+  - name: tags
+  - name: time_published
+    direction: desc
+
+- kind: Entry
+  ancestor: yes
+  properties:
+  - name: language
+  - name: time_published
+
+- kind: Entry
+  ancestor: yes
+  properties:
+  - name: language
+  - name: title
+
+- kind: Entry
+  ancestor: yes
+  properties:
+  - name: time_published
+
+- kind: Entry
   ancestor: yes
   properties:
   - name: time_published
@@ -20,3 +67,9 @@ indexes:
   ancestor: yes
   properties:
   - name: title
+
+- kind: Entry
+  ancestor: yes
+  properties:
+  - name: title
+    direction: desc
