@@ -113,18 +113,27 @@
             <p class="status alert" style="display:none;"></p>
             <!-- News -->
             <div id="news">
-                <div class="search clearfix">
-                    <div class="input-append pull-right">
+                <div class="well clearfix">
+                    <div class="pull-left sort">
+                        <select class="sorting-tags input-medium">
+                            <option>All tags</option>
+                        </select>
+                        <select class="sorting-language input-medium">
+                            <option>All languages</option>
+                        </select>
+                        <select class="sorting input-medium">
+                            <option>Date</option>
+                            <option>Title</option>
+                        </select>
+                        <select class="sorting-order input-medium">
+                            <option value="asc">Ascending</option>
+                            <option value="desc">Descending</option>
+                        </select>
+                    </div>
+                    <div class="input-append pull-right hidden">
                         <input class="input-large" type="search" placeholder="Search entries" />
                         <button class="btn" type="button"><i class="icon-search"></i></button>
                     </div>
-                </div>
-                <div class="sorting well">
-                    <ul class="nav nav-pills">
-                        <li class="disabled"><a href="#">Date</a></li>
-                        <li class=""><a href="#">Source</a></li>
-                        <li class=""><a href="#">Title</a></li>
-                    </ul>
                 </div>
                 <ul class="entry-list unstyled">
                     <li class="template entry media">
