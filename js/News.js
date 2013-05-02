@@ -18,10 +18,10 @@ function News(newsControl) {
         $(document).on('click', '#news .tags a.tag', self.untagEntry);
         $(document).on('click', '#news .entry .title', self.togglePost);
         
+        $(document).on('change', '#news select.sorting-tags', self.loadSortedEntries);
+        $(document).on('change', '#news select.sorting-language', self.loadSortedEntries);
         $(document).on('change', '#news select.sorting', self.loadSortedEntries);
         $(document).on('change', '#news select.sorting-order', self.loadSortedEntries);
-        $(document).on('change', '#news select.sorting-tags', self.loadSortedEntries);
-        $(document).on('change', '#news select.language-tags', self.loadSortedEntries);
     };
 
     self.togglePost = function() {
@@ -136,23 +136,28 @@ function News(newsControl) {
         $.getJSON('/tags').success(function(data) {
             loadingBar.setPercent(50);
             
+            self.tagsList = [];
             $.each(data, function(i, item) {
                 self.tagsList.push(item.title);
             });
+            
+            loadingBar.setPercent(60);
+
+            HTML.createSortingTagsList(self.tagsList);
+            loadingBar.setPercent(70);
 
             var url = '/news';
             if (query) {
                 url += query;
             }
             $.getJSON(url).success(function(data) {
-                loadingBar.setPercent(100);
-                
-                console.log('news loaded', data);
+                var tags = JSON.stringify(self.tagsList);
                 
                 $.each(data, function(i, item) {
-                    var $view = HTML.createEntry(item, JSON.stringify(self.tagsList));
+                    var $view = HTML.createEntry(item, tags);
                     self.$ul.append($view);
                 });
+                loadingBar.setPercent(100);
             });
         });
     };

@@ -114,16 +114,22 @@
             <!-- News -->
             <div id="news">
                 <div class="well clearfix">
-                    <div class="pull-left sort">
+                    <div class="pull-left filter">
+                        <span class="filter-label">Filter:</span>
                         <select class="sorting-tags input-medium">
                             <option>All tags</option>
                         </select>
                         <select class="sorting-language input-medium">
                             <option>All languages</option>
+                            <option value="danish">Danish</option>
+                            <option value="english">English</option>
                         </select>
+                    </div>
+                    <div class="pull-right sort">
+                        <span class="sorting-label">Sorting:</span>
                         <select class="sorting input-medium">
-                            <option>Date</option>
-                            <option>Title</option>
+                            <option value="date">Date</option>
+                            <option value="title">Title</option>
                         </select>
                         <select class="sorting-order input-medium">
                             <option value="asc">Ascending</option>

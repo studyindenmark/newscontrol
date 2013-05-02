@@ -45,6 +45,20 @@ var HTML = {
 
     createInlineTag: function(title) {
         return $('<a class="tag label label-info" href="javascript:void(0);">' + title + '</a>');
+    },
+
+    createSortingTagsList: function(tags) {
+        var $sortingTags = $('#news select.sorting-tags'),
+            selected = $sortingTags.val();
+        console.log($sortingTags, tags);
+
+        $sortingTags.html('');
+        $('<option>All tags</option>').appendTo($sortingTags);
+
+        $.each(tags, function(i, item) {
+            $('<option>' + item + '</option>').appendTo($sortingTags);
+        });
+        $sortingTags.val(selected);
     }
     
 };
