@@ -6,6 +6,16 @@
     cursor: pointer;
 }
 
+.loading-bar {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -100px;
+    width: 200px;
+    z-index: 100;
+    display: none;
+}
+
 .brand {
     width: 120px;
     padding-bottom: 2px !important;

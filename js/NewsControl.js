@@ -34,6 +34,7 @@ function NewsControl() {
         });
 
         // Setup user, news, feeds and tags
+        self.loadingBar = new LoadingBar();
         self.news = new News(self);
         self.feeds = new Feeds(self);
         self.tags = new Tags(self);

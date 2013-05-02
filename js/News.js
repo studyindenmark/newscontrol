@@ -1,6 +1,8 @@
 function News(newsControl) {
     var self = this;
     
+    var loadingBar = newsControl.loadingBar;
+    
     self.newsControl = newsControl;
     self.initialized = false;
     self.$view = $("#news");
@@ -71,13 +73,21 @@ function News(newsControl) {
     
     self.loadFeeds = function() {
         // Get tags so we can autocomplete them
+        
+        loadingBar.setPercent(10);
+        
         $.getJSON('/tags').success(function(data) {
+            loadingBar.setPercent(50);
+            
             $.each(data, function(i, item) {
                 self.tagsList.push(item.title);
             });
 
             $.getJSON('/news').success(function(data) {
+                loadingBar.setPercent(100);
+                
                 console.log('news loaded', data);
+                
                 $.each(data, function(i, item) {
                     var $view = HTML.createEntry(item, JSON.stringify(self.tagsList));
                     self.$ul.append($view);
