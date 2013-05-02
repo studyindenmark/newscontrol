@@ -54,6 +54,9 @@ handlers:
 - url: /invite
   script: invite.app
 
+- url: /signup
+  script: signup.app
+
 - url: /me
   script: me.app
 

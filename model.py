@@ -27,6 +27,9 @@ class User(db.Model):
 class InviteToken(db.Model):
     email = db.StringProperty()
     token = db.StringProperty()
+    
+    # If set, this indicates that the invite code has been used
+    user_signed_up = db.ReferenceProperty(reference_class=User)
 
 class InputFeed(db.Model):
     # parent(User)
