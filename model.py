@@ -35,6 +35,7 @@ class InputFeed(db.Model):
     url = db.StringProperty()
     time_fetched = db.DateTimeProperty(auto_now_add=True)
     deleted = db.BooleanProperty(default=False)
+    language = db.StringProperty(default='none')
     
     def fetch_entries(self, fetch_all):
         """Fetches new entries
@@ -75,6 +76,7 @@ class InputFeed(db.Model):
 			'logo': self.logo,
             'url': self.url,
             'time_fetched': mktime(self.time_fetched.timetuple()),
+            'language': self.language,
         }
 
 class Entry(db.Model):
