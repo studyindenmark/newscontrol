@@ -1,6 +1,9 @@
 from google.appengine.api import users
+from google.appengine.ext import db
+
 from model import User
 
+@db.transactional
 def create_user(google_user):
     user = User(
         google_user=google_user
