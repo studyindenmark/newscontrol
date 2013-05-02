@@ -118,9 +118,9 @@ class Tag(db.Model):
 
     def tag_entry(self, entry):
         self.entry_count += 1
-        entry.tags.append(self.Key())
+        self.put()
+        entry.tags.append(self.key())
         entry.save()
-        self.save()
 
     def to_struct(self, include_entries=False):
         entries = []

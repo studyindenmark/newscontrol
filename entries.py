@@ -13,6 +13,7 @@ from google.appengine.api import users
 from model import InputFeed
 from model import Entry
 from model import User
+from model import Tag
 
 import logging
 
