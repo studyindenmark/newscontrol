@@ -15,7 +15,7 @@ import logging
 class NewsHandler(webapp2.RequestHandler):
     def get(self):
         """Gets all entries from all feeds this user subscribes to"""
-        user = utils.get_or_create_current_user()
+        user = utils.get_current_user()
         
         if not user:
             self.error(403)

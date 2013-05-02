@@ -8,11 +8,9 @@ def create_user(google_user):
     user.put()
     return user
 
-def get_or_create_current_user():
+def get_current_user():
     google_user = users.get_current_user()
     user = get_user_model_for(google_user)
-    if not user and google_user and users.is_current_user_admin():
-        user = create_user(google_user)
     return user
 
 def get_user_model_for(google_user=None):

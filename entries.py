@@ -20,7 +20,7 @@ import logging
 class SpecificEntryHandler(webapp2.RequestHandler):
     def post(self, user_id, feed_id, entry_id):
         """Updates a specific entry"""
-        current_user = utils.get_or_create_current_user()
+        current_user = utils.get_current_user()
         
         if not current_user:
             self.error(403)
@@ -56,7 +56,7 @@ class SpecificEntryHandler(webapp2.RequestHandler):
 
 class TagEntryHandler(webapp2.RequestHandler):
     def post(self, feed_id, entry_id, tag_title):
-        current_user = utils.get_or_create_current_user()
+        current_user = utils.get_current_user()
         
         if not current_user:
             logging.info('no user logged in')
@@ -100,7 +100,7 @@ class TagEntryHandler(webapp2.RequestHandler):
         self.response.out.write('ok')
 
     def delete(self, feed_id, entry_id, tag_title):
-        current_user = utils.get_or_create_current_user()
+        current_user = utils.get_current_user()
         
         if not current_user:
             logging.info('no user logged in')

@@ -1,16 +1,25 @@
 import webapp2
-import utils
 import json
+
+from google.appengine.api import users
 from google.appengine.ext.webapp import util
+
+import utils
 
 class MeHandler(webapp2.RequestHandler):
     def get(self):
         """Redirect to a URL with a Google sign in form"""
-        user = utils.get_or_create_current_user()
+        user = utils.get_current_user()
         
         if not user:
-            self.error(403)
-            return
+            google_user = users.get_current_user()
+            
+            if not google_user:
+                self.error(403)
+                return
+            
+            if users.is_current_user_admin():
+                user = utils.create_user(google_user)
         
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'

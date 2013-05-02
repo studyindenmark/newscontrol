@@ -20,7 +20,7 @@ from model import Entry
 class SpecificFeedHandler(webapp2.RequestHandler):
     def delete(self, model_id):
         """Deletes a specific feed"""
-        current_user = utils.get_or_create_current_user()
+        current_user = utils.get_current_user()
         
         if not current_user:
             self.error(403)
@@ -45,7 +45,7 @@ class SpecificFeedHandler(webapp2.RequestHandler):
 class FeedsHandler(webapp2.RequestHandler):
     def get(self):
         """Gets the feeds for the logged in user"""
-        user = utils.get_or_create_current_user()
+        user = utils.get_current_user()
         
         if not user:
             self.error(403)
@@ -62,7 +62,7 @@ class FeedsHandler(webapp2.RequestHandler):
         
     def post(self):
         """Creates a new feed for the logged in user"""
-        user = utils.get_or_create_current_user()
+        user = utils.get_current_user()
         url = self.request.get('url')
         
         if not user:
@@ -99,7 +99,7 @@ class FeedsHandler(webapp2.RequestHandler):
 
 class LanguageFeedHandler(webapp2.RequestHandler):
     def post(self, feed_id, language):
-        current_user = utils.get_or_create_current_user()
+        current_user = utils.get_current_user()
         
         if not current_user:
             self.error(403)
