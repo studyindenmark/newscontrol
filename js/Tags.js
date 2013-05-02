@@ -16,7 +16,10 @@ function Tags(newsControl) {
         $(document).on('click', '#tags .tag .btn.delete', self.deleteTag);
 
         self.initialized = true;
-        self.loadTags();
+        
+        $(document).bind('me_loaded', function() {
+            self.loadTags();
+        });
     };
 
     self.addTag = function() {

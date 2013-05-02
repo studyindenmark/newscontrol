@@ -12,5 +12,7 @@ function User() {
         self.email = data.email;
         $('.dropdown.user .username').text(self.email);
         $('.dropdown.user').show();
+        
+        $(document).trigger('me_loaded');
     });
 }

@@ -36,7 +36,10 @@ function Feeds(newsControl) {
         $(document).on('click', '#feeds .btn.remove', self.removeFeedCallback);
         $(document).on('change', '#feeds select.language', self.setLanguageOnFeed);
         
-        self.loadFeeds();
+        $(document).bind('me_loaded', function() {
+            self.loadFeeds();
+        });
+        
         self.initialized = true;
     };
 

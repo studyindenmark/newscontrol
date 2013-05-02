@@ -11,7 +11,7 @@ function News(newsControl) {
 
     self.init = function() {
         self.initialized = true;
-        self.loadEntries();
+        
         $(document).on('click', '#news .btn.publish', self.togglePublishedCallback);
         $(document).on('click', '#news .btn.unpublish', self.togglePublishedCallback);
         $(document).on('keydown', '#news input.tag', self.tagKeyDown);
@@ -22,6 +22,10 @@ function News(newsControl) {
         $(document).on('change', '#news select.sorting-language', self.loadSortedEntries);
         $(document).on('change', '#news select.sorting', self.loadSortedEntries);
         $(document).on('change', '#news select.sorting-order', self.loadSortedEntries);
+        
+        $(document).bind('me_loaded', function() {
+            self.loadEntries();
+        });
     };
 
     self.togglePost = function() {
