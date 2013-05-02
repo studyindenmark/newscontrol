@@ -3,7 +3,6 @@ import utils
 import json
 from google.appengine.ext.webapp import util
 from google.appengine.api import users
-from model import User
 
 class MeHandler(webapp2.RequestHandler):
     def get(self):
@@ -16,11 +15,12 @@ class MeHandler(webapp2.RequestHandler):
         
         user = utils.get_current_user_model()
         
-        if google_user != None and user == None:
-            user = User(
-                google_user=google_user,
-            )
-            user.put()
+        if user is None:
+            if users.is_current_user_admin():
+                user = utils.create_user(google_user)
+            else:
+                self.error(401)
+                return
         
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
