@@ -108,7 +108,7 @@ function News(newsControl) {
 
     self.loadSortedEntries = function() {
         var $this = $(this),
-            $parent = $this.parents('.sort'),
+            $parent = $this.parents('.sort-filter'),
             $sorting = $parent.find('.sorting'),
             $sortingOrder = $parent.find('.sorting-order'),
             $sortingTags = $parent.find('.sorting-tags'),

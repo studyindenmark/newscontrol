@@ -8,6 +8,7 @@ import utils
 from google.appengine.ext.webapp import util
 from model import InputFeed
 from model import Entry
+from model import Tag
 
 import logging
 
@@ -20,10 +21,21 @@ class NewsHandler(webapp2.RequestHandler):
             self.error(403)
             return
             
-        entries = Entry.all().ancestor(user)
-
+        # Filter and sorting
         order = self.request.get('order')
-        logging.info(order)
+        lang = self.request.get('lang')
+        tag_title = self.request.get('tag')
+
+        # Filter
+        if tag_title:
+            tag = Tag.all().ancestor(user.key()).filter('title_lower =', tag_title.lower()).get()
+            entries = Entry.all().filter('tags =', tag.key())
+        elif lang:
+            pass
+        else:
+            entries = Entry.all().ancestor(user)
+
+        # Sorting
         if order:
             if order == 'date-asc':
                 entries = entries.order('time_published')
@@ -33,6 +45,8 @@ class NewsHandler(webapp2.RequestHandler):
                 entries = entries.order('title')
             elif order == 'title-desc':
                 entries = entries.order('-title')
+        else:
+            entries = entries.order('-time_published')
 
         entries = entries.fetch(25)
             
