@@ -8,6 +8,7 @@ from google.appengine.api import users
 import mail
 
 from model import InviteToken
+from model import User
 import utils
 
 class SignupHandler(webapp2.RequestHandler):
@@ -43,7 +44,7 @@ class SignupHandler(webapp2.RequestHandler):
         m.user_signed_up = new_user
         m.save()
         
-        sender = db.get(m.sender)
+        sender = User.get_by_id(m.sender)
         
         utils.copy_feeds_from_user(sender, new_user)
         

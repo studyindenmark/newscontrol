@@ -44,7 +44,7 @@ class InputFeed(db.Model):
     deleted = db.BooleanProperty(default=False)
     language = db.StringProperty(default='none')
     
-    def fetch_entries(self, fetch_all):
+    def fetch_entries(self, fetch_all=True):
         """Fetches new entries
         
         If fetch_all is set to true, all entries will be fetched, regardless

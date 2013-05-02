@@ -2,6 +2,7 @@ from google.appengine.api import users
 from google.appengine.ext import db
 
 from model import User
+from model import InputFeed
 
 latest_signup = None
 
