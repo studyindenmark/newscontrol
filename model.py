@@ -4,6 +4,7 @@ from time import mktime
 
 import datetime
 import feedparser
+import logging
 
 class User(db.Model):
     google_user = db.UserProperty()
@@ -57,7 +58,10 @@ class InputFeed(db.Model):
             content = None
             if len(entry.get('content', [])) > 0:
                 content = entry.get('content')[0].get('value')
-                
+
+            if not content:
+                content = entry.get('summary')
+
             if fetch_all or (published > self.time_fetched):
                 m = Entry(
                     guid=entry.get('guid'),
