@@ -17,6 +17,8 @@ from model import InputFeed
 from model import User
 from model import Entry
 
+import logging
+
 class SpecificFeedHandler(webapp2.RequestHandler):
     def delete(self, model_id):
         """Deletes a specific feed"""
@@ -75,18 +77,13 @@ class FeedsHandler(webapp2.RequestHandler):
         id = feed.get('id')
         logo = feed.get('gd_image', {'src': '/img/rss-placeholder.png'}).get('src')
         title = feed.get('title')
-        content = feed.get('summary') # Yes, summary.
         link = feed.get('link')
         
-        if 'content' in feed:
-            content = feed.get('content').get('value')
-            
         m = InputFeed(
             parent=user,
             logo=logo,
             url=url,
             title=title,
-            content=content,
             link=link,
         )
         
