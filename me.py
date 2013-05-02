@@ -8,7 +8,10 @@ import utils
 
 class MeHandler(webapp2.RequestHandler):
     def get(self):
-        """Redirect to a URL with a Google sign in form"""
+        """ Return info about current logged in user
+        
+        Automatically create internal user models for admin google users.
+        """
         user = utils.get_current_user()
         
         if not user:
