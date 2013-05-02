@@ -24,6 +24,7 @@ var HTML = {
         $clone.find('.title').text(data.title);
         $clone.find('.content').html(data.content);
         $clone.find('.url').attr('href', data.url).text(data.url);
+        $clone.find('.feed-logo').attr('src', data.feed_logo);
         $clone.find('input.tag').attr('data-source', tags_autocomplete);
         return $clone;
     },

@@ -49,7 +49,7 @@ class InputFeed(db.Model):
             # http://pythonhosted.org/feedparser/date-parsing.html
             tuple = entry['published_parsed']
             published = datetime.datetime(*tuple[:6])
-
+            
             content = None
             if len(entry.get('content', [])) > 0:
                 content = entry.get('content')[0].get('value')
@@ -94,9 +94,12 @@ class Entry(db.Model):
             for tag in db.get(self.tags):
                 tags.append(tag.to_struct())
         
+        parent = self.parent()
+        
         return {
             'id': self.key().id(),
-            'feed_id': self.parent().key().id(),
+            'feed_id': parent.key().id(),
+            'feed_logo': parent.logo,
             'title': self.title,
     		'content': self.content,
             'link': self.link,
