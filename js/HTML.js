@@ -26,9 +26,9 @@ var HTML = {
         $clone.find('.content').html(data.content);
         $clone.find('.url').attr('href', data.url).text(data.url);
         $clone.find('.feed-logo').attr('src', data.feed_logo);
-        $input.find('input.tag').attr('data-source', tags_autocomplete);
+        $input.attr('data-source', tags_autocomplete);
         $.each(data.tags, function(index, item) {
-            $input.insertBefore(HTML.createInlineTag(item.title));
+            HTML.createInlineTag(item.title).insertBefore($input);
         });
         return $clone;
     },

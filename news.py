@@ -23,7 +23,7 @@ class NewsHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         
-        entries = [i.to_struct() for i in entries]
+        entries = [i.to_struct(include_tags=True) for i in entries]
         
         self.response.out.write(json.dumps(entries))
 
