@@ -18,7 +18,7 @@ from model import User
 from model import Entry
 
 class SpecificFeedHandler(webapp2.RequestHandler):
-    def delete(self, user_id, model_id):
+    def delete(self, model_id):
         """Deletes a specific feed"""
         current_user = utils.get_current_user_model()
         
@@ -26,19 +26,9 @@ class SpecificFeedHandler(webapp2.RequestHandler):
             self.error(403)
             return
         
-        user = User.get_by_id(int(user_id))
+        m = InputFeed.get_by_id(int(model_id), parent=current_user)
         
-        if user == None:
-            self.error(404)
-            return
-        
-        if current_user != user and not users.is_current_user_admin():
-            self.error(401)
-            return
-        
-        m = InputFeed.get_by_id(int(model_id), parent=user)
-        
-        if m == None:
+        if not m:
             self.error(404)
             return
         
@@ -134,7 +124,7 @@ class LanguageFeedHandler(webapp2.RequestHandler):
         self.response.out.write('ok')
 
 app = webapp2.WSGIApplication([
-    ('/(.*)/feeds/(.*)', SpecificFeedHandler),
+    ('/feeds/(.*)', SpecificFeedHandler),
     ('/feeds/(.*)/languages/(.*)', LanguageFeedHandler),
     ('/feeds', FeedsHandler),
 ], debug=True)

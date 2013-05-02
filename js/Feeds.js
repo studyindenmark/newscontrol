@@ -63,7 +63,7 @@ function Feeds(newsControl) {
         
         $.ajax({
             type: 'DELETE',
-            url: '/' + newsControl.user.id + '/feeds/' + modelId,
+            url: '/feeds/' + modelId,
             statusCode: {
                 200: function(data) {
                     console.log('feed removed', data);

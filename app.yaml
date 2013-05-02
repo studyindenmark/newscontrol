@@ -27,7 +27,7 @@ handlers:
 - url: /feeds/.*/entries/.*/tags/.*
   script: entries.app
   
-- url: /.*/feeds/.*
+- url: /feeds/.*
   script: feeds.app
 
 - url: /feeds/.*/languages/.*
