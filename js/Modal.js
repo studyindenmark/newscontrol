@@ -39,7 +39,7 @@ var Modal = {
 	showLogin: function() {
         $('#loginModal').modal({
             backdrop: 'static',
-            keyboard: true,
+            keyboard: false,
             show: true
         });
     },
@@ -60,6 +60,13 @@ var Modal = {
             keyboard: true,
             show: true
         });
-    }
-    
+    },
+
+    showUnauthorized: function(message) {
+        $('#unauthorizedModal').modal({
+            backdrop: 'static',
+            keyboard: false,
+            show: true
+        });
+    }    
 };

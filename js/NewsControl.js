@@ -14,7 +14,7 @@ function NewsControl() {
         $(document).ajaxError(function (e, r, ajaxOptions, thrownError) {
             switch (r.status) {
                 case 401:
-                    Modal.showInformation('You are not authorized.');
+                    Modal.showUnauthorized();
                     break;
                 case 403:
                     // Logged out
