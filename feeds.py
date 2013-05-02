@@ -73,7 +73,7 @@ class FeedsHandler(webapp2.RequestHandler):
         feed = feed.get('feed')
         
         id = feed.get('id')
-        logo = feed.get('gd_image', {}).get('src')
+        logo = feed.get('gd_image', {'src': '/img/rss-placeholder.png'}).get('src')
         title = feed.get('title')
         content = feed.get('summary') # Yes, summary.
         link = feed.get('link')
