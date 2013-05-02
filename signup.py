@@ -16,6 +16,7 @@ class SignupHandler(webapp2.RequestHandler):
         if not users.get_current_user():
             url = users.create_login_url()
             self.redirect(url)
+            return
         
         if utils.get_current_user_model():
             # User is already logged in
