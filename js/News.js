@@ -74,6 +74,8 @@ function News(newsControl) {
     self.loadEntries = function() {
         // Get tags so we can autocomplete them
         
+        self.$ul.find('.entry').not('.template').remove();
+        
         loadingBar.setPercent(10);
         
         $.getJSON('/tags').success(function(data) {

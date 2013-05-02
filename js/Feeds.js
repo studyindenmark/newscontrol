@@ -29,6 +29,7 @@ function Feeds(newsControl) {
                 self.$ul.append($view);
             }).complete(function() {
                 loadingBar.setPercent(100);
+                newsControl.news.loadEntries();
             });
         });
         
@@ -54,6 +55,7 @@ function Feeds(newsControl) {
                 200: function(data) {
                     console.log('feed removed', data);
                     $container.fadeOut();
+                    newsControl.news.loadEntries();
                 }
             },
             complete: function() {
