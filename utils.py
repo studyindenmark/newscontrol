@@ -3,16 +3,24 @@ from google.appengine.ext import db
 
 from model import User
 
+latest_signup = None
+
 @db.transactional
 def create_user(google_user):
+    global latest_signup
     user = User(
         google_user=google_user
     )
     user.put()
+    latest_signup = user
     return user
 
 def get_current_user():
     google_user = users.get_current_user()
+    
+    if latest_signup != None and google_user == latest_signup.google_user:
+        return latest_signup
+        
     user = get_user_model_for(google_user)
     return user
 
