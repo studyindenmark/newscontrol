@@ -1,3 +1,6 @@
+#news, #feeds, #tags {
+    display: none;
+}
 .template {
     display: none !important;
 }
@@ -55,6 +58,14 @@
 
 .tag {
     margin: 0 5px 0 0;
+}
+
+#news .entry .content {
+    display: none;
+}
+
+#news .entry.maximized .content {
+    display: block;
 }
 
 input[type="text"].input-low {

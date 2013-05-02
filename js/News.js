@@ -16,6 +16,13 @@ function News(newsControl) {
         $(document).on('click', '#news .btn.unpublish', self.togglePublishedCallback);
         $(document).on('keydown', '#news input.tag', self.tagKeyDown);
         $(document).on('click', '#news .tags a.tag', self.untagEntry);
+        $(document).on('click', '#news .entry .title', self.togglePost);
+    };
+
+    self.togglePost = function() {
+        var $this = $(this),
+            $container = $this.parents('li.entry');
+        $container.toggleClass('maximize');
     };
     
     self.togglePublishedCallback = function() {
