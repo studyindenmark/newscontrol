@@ -81,6 +81,7 @@ function News(newsControl) {
         $.post(url).success(function(data) {
             console.log('Tagged entry', modelId, tag_title, data);
             HTML.createInlineTag(tag_title).insertBefore($container.find('input.tag'));
+            $this.val('');
         });
     };
 
