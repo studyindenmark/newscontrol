@@ -106,7 +106,7 @@ class FeedsHandler(webapp2.RequestHandler):
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         self.response.out.write(json.dumps(m.to_struct()))
 
-class LanguageFeedsHandler(webapp2.RequestHandler):
+class LanguageFeedHandler(webapp2.RequestHandler):
     def post(self, feed_id, language):
         current_user = utils.get_current_user_model()
         

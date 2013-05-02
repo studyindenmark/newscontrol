@@ -6,6 +6,7 @@ var HTML = {
         $clone.removeClass('template');
         $clone.find('.title').text(data.title);
         $clone.find('.url').attr('href', data.url).text(data.url);
+        $clone.find('select.language').val(data.language);
         return $clone;
     },
     

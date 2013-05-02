@@ -34,9 +34,22 @@ function Feeds(newsControl) {
         });
         
         $(document).on('click', '#feeds .btn.remove', self.removeFeedCallback);
+        $(document).on('change', '#feeds select.language', self.setLanguageOnFeed);
         
         self.loadFeeds();
         self.initialized = true;
+    };
+
+    self.setLanguageOnFeed = function() {
+        var $this = $(this),
+            $container = $this.parents('li.feed'),
+            feedID = $container.data('modelId'),
+            url = '/feeds/'+ feedID + '/languages/' + $this.val();
+
+        loadingBar.setPercent(50)
+        $.post(url).success(function(){
+            loadingBar.setPercent(100);
+        });
     };
     
     self.removeFeedCallback = function() {
