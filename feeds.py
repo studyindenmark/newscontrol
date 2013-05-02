@@ -124,7 +124,7 @@ class LanguageFeedHandler(webapp2.RequestHandler):
         self.response.out.write('ok')
 
 app = webapp2.WSGIApplication([
-    ('/feeds/(.*)', SpecificFeedHandler),
     ('/feeds/(.*)/languages/(.*)', LanguageFeedHandler),
+    ('/feeds/(.*)', SpecificFeedHandler),
     ('/feeds', FeedsHandler),
 ], debug=True)
