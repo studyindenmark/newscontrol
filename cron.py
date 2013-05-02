@@ -13,7 +13,7 @@ from model import Entry
 class FetchFeedsCronJob(webapp2.RequestHandler):
     def get(self):
         """Loop through all feeds and fetches their entries"""
-        feeds = InputFeed.all()
+        feeds = InputFeed.all().filter('deleted =', False)
             
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
