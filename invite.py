@@ -8,10 +8,21 @@ from google.appengine.api import users
 import mail
 
 from model import InviteToken
+import utils
 
 class InviteHandler(webapp2.RequestHandler):
     def post(self):
         """Send an invitation mail to the provided email address"""
+        
+        user = utils.get_current_user()
+        
+        if not user:
+            self.error(403)
+            return
+        
+        if not users.is_current_user_admin():
+            self.error(401)
+            return
         
         email = self.request.get('email')
         token = uuid.uuid1().hex
@@ -19,6 +30,7 @@ class InviteHandler(webapp2.RequestHandler):
         mail.send_invite_email(email, token)
     
         m = InviteToken(
+            sender=user.key(),
             email=email,
             token=token
         )
