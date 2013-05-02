@@ -4,14 +4,11 @@ function News(newsControl) {
     var loadingBar = newsControl.loadingBar;
     
     self.newsControl = newsControl;
-    self.initialized = false;
     self.$view = $("#news");
     self.$ul = self.$view.find('> ul');
     self.tagsList = [];
 
     self.init = function() {
-        self.initialized = true;
-        
         $(document).on('click', '#news .btn.publish', self.togglePublishedCallback);
         $(document).on('click', '#news .btn.unpublish', self.togglePublishedCallback);
         $(document).on('keydown', '#news input.tag', self.tagKeyDown);

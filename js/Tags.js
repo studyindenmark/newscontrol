@@ -2,7 +2,6 @@ function Tags(newsControl) {
     var self = this;
 
     self.newsControl = newsControl;
-	self.initialized = false;
     self.$view = $("#tags");
     self.$ul = self.$view.find('> ul');
 
@@ -15,9 +14,8 @@ function Tags(newsControl) {
         $(document).on('click', '#tags .tag .btn.save', self.renameTag);
         $(document).on('click', '#tags .tag .btn.delete', self.deleteTag);
 
-        self.initialized = true;
-        
         $(document).bind('me_loaded', function() {
+            console.log('me_loaded tags trigger');
             self.loadTags();
         });
     };

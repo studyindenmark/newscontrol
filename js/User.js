@@ -5,6 +5,9 @@ function User() {
     self.nickname = null;
     self.email = null;
     
+    self.init = function() {
+    };
+    
     $.getJSON('/me').success(function(data) {
         console.log('user loaded', data);
         self.id = data.id;
@@ -13,6 +16,7 @@ function User() {
         $('.dropdown.user .username').text(self.email);
         $('.dropdown.user').show();
         
+        console.log('calling me_loaded listeners');
         $(document).trigger('me_loaded');
     });
 }

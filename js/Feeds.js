@@ -3,7 +3,6 @@ function Feeds(newsControl) {
     
     var loadingBar = newsControl.loadingBar;
     
-    self.initialized = false;
     self.$view = $("#feeds");
     self.$ul = self.$view.find('> ul');
 
@@ -39,8 +38,6 @@ function Feeds(newsControl) {
         $(document).bind('me_loaded', function() {
             self.loadFeeds();
         });
-        
-        self.initialized = true;
     };
 
     self.setLanguageOnFeed = function() {

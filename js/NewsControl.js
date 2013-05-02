@@ -43,5 +43,11 @@ function NewsControl() {
         self.tags = new Tags(self);
         self.user = new User();
         self.topBar = new TopBar(self);
+        
+        self.user.init();
+        self.news.init();
+        self.feeds.init();
+        self.tags.init();
+        self.topBar.init();
     };
 }
