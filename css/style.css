@@ -30,6 +30,11 @@
     margin-bottom: 0;
 }
 
+.feed-logo {
+    width: 64px;
+    height: 64px;
+}
+
 .tags {
     margin: 0;
 }
