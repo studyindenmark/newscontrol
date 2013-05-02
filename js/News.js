@@ -22,7 +22,7 @@ function News(newsControl) {
     self.togglePost = function() {
         var $this = $(this),
             $container = $this.parents('li.entry');
-        $container.toggleClass('maximize');
+        $container.toggleClass('maximized');
     };
     
     self.togglePublishedCallback = function() {
