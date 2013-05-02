@@ -106,7 +106,29 @@ class FeedsHandler(webapp2.RequestHandler):
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         self.response.out.write(json.dumps(m.to_struct()))
 
+class LanguageFeedsHandler(webapp2.RequestHandler):
+    def post(self, feed_id, language):
+        current_user = utils.get_current_user_model()
+        
+        if not current_user:
+            self.error(403)
+            return
+        
+        feed = InputFeed.get_by_id(int(feed_id), parent=current_user)
+        
+        if not feed:
+            self.error(404)
+            return
+
+        feed.language = language
+        feed.save()
+        
+        self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
+        self.response.headers['Access-Control-Allow-Origin'] = '*'
+        self.response.out.write('ok')
+
 app = webapp2.WSGIApplication([
     ('/(.*)/feeds/(.*)', SpecificFeedHandler),
+    ('/feeds/(.*)/languages/(.*)', LanguageFeedHandler),
     ('/feeds', FeedsHandler),
 ], debug=True)
