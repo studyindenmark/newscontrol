@@ -11,7 +11,7 @@ function News(newsControl) {
 
     self.init = function() {
         self.initialized = true;
-        self.loadFeeds();
+        self.loadEntries();
         $(document).on('click', '#news .btn.publish', self.togglePublishedCallback);
         $(document).on('click', '#news .btn.unpublish', self.togglePublishedCallback);
         $(document).on('keydown', '#news input.tag', self.tagKeyDown);
@@ -71,7 +71,7 @@ function News(newsControl) {
         });
     };
     
-    self.loadFeeds = function() {
+    self.loadEntries = function() {
         // Get tags so we can autocomplete them
         
         loadingBar.setPercent(10);
