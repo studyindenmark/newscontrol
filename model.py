@@ -89,6 +89,7 @@ class Entry(db.Model):
     published = db.BooleanProperty(default=False)
     tags = db.ListProperty(db.Key)
     user = db.ReferenceProperty(reference_class=User)
+    language = db.StringProperty(default='none') # set by feed
 
     def to_struct(self, include_tags=False):
         tags = []

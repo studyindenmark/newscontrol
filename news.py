@@ -30,10 +30,11 @@ class NewsHandler(webapp2.RequestHandler):
         if tag_title:
             tag = Tag.all().ancestor(user.key()).filter('title_lower =', tag_title.lower()).get()
             entries = Entry.all().filter('tags =', tag.key())
-        elif lang:
-            pass
         else:
             entries = Entry.all().ancestor(user)
+
+        if lang and lang != 'all':
+            entries = entries.filter('language =', lang)
 
         # Sorting
         if order:

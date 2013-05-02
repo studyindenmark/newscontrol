@@ -15,6 +15,7 @@ from google.appengine.api import users
 
 from model import InputFeed
 from model import User
+from model import Entry
 
 class SpecificFeedHandler(webapp2.RequestHandler):
     def delete(self, user_id, model_id):
@@ -120,9 +121,14 @@ class LanguageFeedHandler(webapp2.RequestHandler):
             self.error(404)
             return
 
+        entries = Entry.all().ancestor(feed)
+        for entry in entries:
+            entry.language = language
+            entry.save()
+
         feed.language = language
         feed.save()
-        
+
         self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
         self.response.out.write('ok')
