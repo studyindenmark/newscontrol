@@ -30,7 +30,7 @@ class InviteHandler(webapp2.RequestHandler):
         mail.send_invite_email(email, token)
     
         m = InviteToken(
-            sender=user.key(),
+            sender=user.key().id(),
             email=email,
             token=token
         )

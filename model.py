@@ -30,7 +30,7 @@ class InviteToken(db.Model):
     token = db.StringProperty()
     
     # The user who initiated the invite process
-    sender = db.Key()
+    sender = db.IntegerProperty()
     
     # If set, this indicates that the invite code has been used
     user_signed_up = db.ReferenceProperty(reference_class=User)
