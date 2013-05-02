@@ -3,7 +3,7 @@ from model import User
 
 def create_user(google_user):
     user = User(
-        google_user=google_user,
+        google_user=google_user
     )
     user.put()
     return user
