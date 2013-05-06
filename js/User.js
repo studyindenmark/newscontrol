@@ -20,4 +20,17 @@ function User() {
         console.log('calling me_loaded listeners');
         $(document).trigger('me_loaded');
     });
+
+    self.changeNickname = function(nickname) {
+        if (self.nickname === nickname || !nickname) {
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            data: {nickname: nickname},
+            url: '/me'
+        }).success(function(data) {
+            self.nickname = data.nickname;
+        });
+    };
 }
