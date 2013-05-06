@@ -112,7 +112,8 @@ function Tags(newsControl) {
     self.loadTags = function() {
         $.getJSON('/tags').success(function(data) {
             $.each(data, function(i, item) {
-                var $view = HTML.createTag(item, newsControl.user.id);
+                var idOrNick = newsControl.user.nickname || newsControl.user.id,
+                    $view = HTML.createTag(item, idOrNick);
                 self.$ul.append($view);
             });
         });
