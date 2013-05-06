@@ -25,9 +25,12 @@
     padding-top: 2px !important;
 }
 
+.share {
+    margin-top: 10px;
+}
 .share img {
-    margin-right: 10px;
-    cursor: pointer;
+    margin-right: 5px;
+    height: 20px;
 }
 
 /* Hide user dropdown until loaded. */
@@ -86,6 +89,9 @@
     display: block;
     background-color: #FFF;
 }
+
+#news .entry .share { display: none; }
+#news .entry.maximized .share { display: block; }
 
 #news .entry {
     border-radius: 5px;

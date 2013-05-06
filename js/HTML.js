@@ -17,12 +17,15 @@ var HTML = {
         
         $clone.data('modelId', data.id);
         $clone.data('feedId', data.feed_id);
+        $clone.data('link', data.link);
         
         $clone.removeClass('template');
         
         if (data.published) {
             $clone.addClass('published');
         }
+        
+        $clone.find('.mail').attr('href', 'mailto:user@example.com?Subject=' + encodeURIComponent(data.link));
         
         $clone.find('.title').text(data.title).append($('<span class="caret"></span>'));
         $clone.find('.content').html(data.content);
