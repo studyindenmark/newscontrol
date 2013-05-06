@@ -39,4 +39,7 @@ function TopBar(newsControl) {
         Modal.showInvite();
     });
 
+    $('.navbar a.change-nickname').click(function() {
+        Modal.showNickname();
+    });
 }

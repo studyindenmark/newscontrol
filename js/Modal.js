@@ -1,6 +1,7 @@
 var Modal = {
     
     init: function(newsControl) {
+        // Invite
         $('#inviteModal .btn-primary').click(function(event) {
             var email = $('#inviteModal input[name=email]').val();
             
@@ -25,6 +26,14 @@ var Modal = {
             }).complete(function() {
                 newsControl.loadingBar.setPercent(100);
             });
+        });
+
+        // Nickname
+        $('#nicknameModal a.tag-link').click(function() {
+            newsControl.topBar.changeTab('tags');
+        });
+        $('#nicknameModal .save').click(function() {
+            newsControl.user.changeNickname($('#nicknameModal input.nickname').val());
         });
     },
     
@@ -68,5 +77,14 @@ var Modal = {
             keyboard: false,
             show: true
         });
-    }    
+    },
+
+    showNickname: function() {
+        $('#nicknameModal input.nickname').val(newsControl.user.nickname);
+        $('#nicknameModal').modal({
+            backdrop: 'static',
+            keyboard: true,
+            show: true
+        });
+    }, 
 };
