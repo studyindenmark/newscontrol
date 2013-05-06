@@ -20,8 +20,12 @@ function News(newsControl) {
         $(document).on('change', '#news select.sorting', self.loadSortedEntries);
         $(document).on('change', '#news select.sorting-order', self.loadSortedEntries);
         
-        $(document).bind('me_loaded', function() {
+        $(document).one('tags_loaded', function(event, params) {
+            self.loadTagsData(params);
             self.loadEntries();
+            $(document).bind('tags_loaded', function(event, params) {
+                self.loadTagsData(params);
+            });
         });
     };
 
@@ -130,40 +134,34 @@ function News(newsControl) {
         }
         self.loadEntries(query);
     };
+
+    self.loadTagsData = function(tagsData) {
+        self.tagsList = [];
+        console.log(tagsData);
+        $.each(tagsData, function(i, item) {
+            self.tagsList.push(item.title);
+        });
+        
+        HTML.createSortingTagsList(self.tagsList);
+    };
     
     self.loadEntries = function(query) {
-        // Get tags so we can autocomplete them
+        loadingBar.setPercent(10);
         
         self.$ul.find('.entry').not('.template').remove();
         
-        loadingBar.setPercent(10);
-        
-        $.getJSON('/tags').success(function(data) {
-            loadingBar.setPercent(50);
+        var url = '/news';
+        if (query) {
+            url += query;
+        }
+        $.getJSON(url).success(function(data) {
+            var tags = JSON.stringify(self.tagsList);
             
-            self.tagsList = [];
             $.each(data, function(i, item) {
-                self.tagsList.push(item.title);
+                var $view = HTML.createEntry(item, tags);
+                self.$ul.append($view);
             });
-            
-            loadingBar.setPercent(60);
-
-            HTML.createSortingTagsList(self.tagsList);
-            loadingBar.setPercent(70);
-
-            var url = '/news';
-            if (query) {
-                url += query;
-            }
-            $.getJSON(url).success(function(data) {
-                var tags = JSON.stringify(self.tagsList);
-                
-                $.each(data, function(i, item) {
-                    var $view = HTML.createEntry(item, tags);
-                    self.$ul.append($view);
-                });
-                loadingBar.setPercent(100);
-            });
+            loadingBar.setPercent(100);
         });
     };
 }

@@ -1,11 +1,16 @@
 function TopBar(newsControl) {
     var self = this;
     
+    self.tagsLoaded = false;
+
     self.init = function() {
         $(document).bind('me_loaded', function() {
             if (!newsControl.user.isAdmin) {
                 $('.dropdown-menu .invite').hide();
             }
+        });
+        $(document).one('tags_loaded', function() {
+            self.tagsLoaded = true;
         });
     };
 
@@ -18,6 +23,10 @@ function TopBar(newsControl) {
 
         $container.children('div').hide();
         $container.children('#' + tabName).show();
+
+        if (tabName === 'tags' && self.tagsLoaded) {
+            newsControl.tags.loadTags();
+        }
 
         localStorage.lastTab = tabName;
     };

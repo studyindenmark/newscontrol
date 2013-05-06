@@ -111,11 +111,13 @@ function Tags(newsControl) {
 
     self.loadTags = function() {
         $.getJSON('/tags').success(function(data) {
+            self.$ul.find('.tag').not('.template').remove();
             $.each(data, function(i, item) {
                 var idOrNick = newsControl.user.nickname || newsControl.user.id,
                     $view = HTML.createTag(item, idOrNick);
                 self.$ul.append($view);
             });
+            $(document).trigger('tags_loaded', [data]);
         });
     };
 }
