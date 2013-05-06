@@ -4,7 +4,7 @@ var Modal = {
         $('#inviteModal .btn-primary').click(function(event) {
             var email = $('#inviteModal input[name=email]').val();
             
-            if (!email || email.indexOf('@') === -1 || email.indexOf('.') == -1) {
+            if (!email || email.indexOf('@') === -1 || email.indexOf('.') === -1) {
                 alert('An valid email must be provided')
                 event.preventDefault();
                 
