@@ -14,7 +14,7 @@ function User() {
         self.nickname = data.nickname;
         self.email = data.email;
         self.isAdmin = data.is_admin;
-        $('.dropdown.user .username').text(self.email);
+        $('.dropdown.user .username').text(self.nickname || self.email);
         $('.dropdown.user').show();
         
         console.log('calling me_loaded listeners');
@@ -31,6 +31,7 @@ function User() {
             url: '/me'
         }).success(function(data) {
             self.nickname = data.nickname;
+            $('.dropdown.user .username').text(self.nickname);
         });
     };
 }
