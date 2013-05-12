@@ -1,4 +1,4 @@
 cron:
 - description: fetch feeds
   url: /cron/fetch_feeds
-  schedule: every 5 minutes
+  schedule: every 60 minutes
