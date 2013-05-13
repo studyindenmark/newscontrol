@@ -21,7 +21,7 @@ class FetchFeedsCronJob(webapp2.RequestHandler):
         count = 0
         for feed in feeds:
             count += 1
-            feed.fetch_entries()
+            feed.fetch_entries(fetch_all=False)
         
         self.response.out.write(json.dumps({
             'nr_of_feeds_fetched': count,
