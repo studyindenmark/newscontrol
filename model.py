@@ -55,7 +55,11 @@ class InputFeed(db.Model):
         
         for entry in entries:
             # http://pythonhosted.org/feedparser/date-parsing.html
-            tuple = entry['published_parsed']
+            tuple = entry.get('published_parsed')
+            
+            if tuple == None:
+                tuple = entry.get('updated_parsed')
+                
             published = datetime.datetime(*tuple[:6])
             
             content = None
