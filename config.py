@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
 DOMAIN = 'studyindenmark-newscontrol.appspot.com'
-MAIL_SENDER = "Per Thulin <per@youtify.com>"
+MAIL_SENDER = "Study in Denmark <studyindenmark@gmail.com>"
