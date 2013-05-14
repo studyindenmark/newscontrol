@@ -28,9 +28,9 @@ var HTML = {
         $clone.find('.mail').attr('href', 'mailto:user@example.com?Subject=' + encodeURIComponent(data.link));
         
         $clone.find('.title').text(data.title).append($('<span class="caret"></span>'));
-        $clone.find('.content').html(data.content);
         $clone.find('.url').attr('href', data.link).text(data.link);
         $clone.find('.feed-logo').attr('src', data.feed_logo);
+        $clone.find('.content').html(data.content);
         $input.attr('data-source', tags_autocomplete);
         $.each(data.tags, function(index, item) {
             HTML.createInlineTag(item.title).insertBefore($input);
