@@ -29,7 +29,7 @@ var HTML = {
         
         $clone.find('.title').text(data.title).append($('<span class="caret"></span>'));
         $clone.find('.content').html(data.content);
-        $clone.find('.url').attr('href', data.url).text(data.url);
+        $clone.find('.url').attr('href', data.link).text(data.link);
         $clone.find('.feed-logo').attr('src', data.feed_logo);
         $input.attr('data-source', tags_autocomplete);
         $.each(data.tags, function(index, item) {
