@@ -1,6 +1,11 @@
+/**** Style for NewsControl ****/
+
+/* General style
+**********************************************************/
 #news, #feeds, #tags {
     display: none;
 }
+
 .template {
     display: none !important;
 }
@@ -33,12 +38,25 @@
     height: 20px;
 }
 
+input[type="text"].input-low {
+   height: 14px !important;
+   font-size: 12px;
+   line-height: 14px;
+   margin: 0;
+}
+
+.entry-list, .feeds-list {
+    margin: 0;
+}
+
 /* Hide user dropdown until loaded. */
 .dropdown.user {
     display: none;
 }
-#news > .search,
-#feeds > .add {
+
+/* News page
+**********************************************************/
+#news > .search {
     margin-bottom: 15px;
 }
 
@@ -51,78 +69,19 @@
     margin-bottom: 0;
 }
 
-.feed-logo {
+/* Feeds page
+**********************************************************/
+#feeds > .add {
+    margin-bottom: 15px;
+}
+
+.feed .feed-logo {
     width: 64px;
     height: 64px;
 }
 
-.tags {
-    margin: 0;
-}
-
-.tag {
-    margin: 0 5px 0 0;
-}
-
-#news .entry .title .caret {
-    margin-top: 7px;
-    margin-left: 7px;
-    border-bottom: 4px solid transparent;
-    border-top: 4px solid transparent;
-    border-left: 4px solid #000000;
-    content: "";
-}
-#news .entry.maximized .title .caret {
-    margin-top: 10px;
-    margin-left: 5px;
-    
-    border-top: 4px solid #000000;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
-}
-
-#news .entry .content {
-    display: none;
-}
-
-#news .entry.maximized .content {
-    display: block;
-    background-color: #FFF;
-}
-
-#news .entry .share { display: none; }
-#news .entry.maximized .share { display: block; }
-
-#news .entry {
-    border-radius: 5px;
-}
-#news .entry.published {
-    background-color: rgba(0, 255, 0, 0.2);
-}
-
-input[type="text"].input-low {
-   height: 14px !important;
-   font-size: 12px;
-   line-height: 14px;
-   margin: 0;
-}
-
-.entry.published .btn.publish { display: none; }
-.entry .btn.unpublish { display: none; }
-.entry.published .btn.unpublish { display: block; }
-
-.entry-list, .feeds-list {
-    margin: 0;
-}
-.entry-list .media,
-.feeds-list .media {
-    padding: 5px;
-}
-
-.media-subheader {
-    font-size: 13px;
-}
-
+/* Tags page
+**********************************************************/
 .tags-list .title-edit {
     display: none;
 }
@@ -134,4 +93,88 @@ input[type="text"].input-low {
     margin-top: 8px;
     margin-left: 10px;
     display: inline-block;
+}
+
+/* Entry
+**********************************************************/
+.entry {
+    border-radius: 5px;
+    margin-top: 0;
+    padding: 5px 5px 5px 10px;
+}
+.entry .tags {
+    margin: 0;
+}
+
+.entry .tag {
+    margin: 0 5px 0 0;
+}
+
+.entry.published,
+.entry.published.maximized {
+    background-color: rgba(0, 255, 0, 0.2);
+}
+
+.entry .feed-logo {
+    width: 20px;
+    height: 20px;
+}
+
+.entry .title {
+    font-size: 15px;
+    margin-bottom: 0;
+}
+.entry .feed-logo,
+.entry .title {
+    padding-top: 5px;
+}
+
+.entry .title .caret {
+    margin-top: 7px;
+    margin-left: 7px;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #000000;
+    content: "";
+}
+.entry.maximized .title .caret {
+    margin-top: 10px;
+    margin-left: 5px;
+    
+    border-top: 4px solid #000000;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.entry .media-body {
+    margin-left: 0;
+}
+
+.entry .media-subheader,
+.entry .tags,
+.entry .content,
+.entry .share {
+    display: none;
+}
+
+.entry .media-subheader {
+    font-size: 13px;
+}
+
+.entry.maximized .media-subheader,
+.entry.maximized .tags,
+.entry.maximized .content,
+.entry.maximized .share {
+    display: block;
+}
+.entry.maximized .content {
+    background-color: #FFF;
+}
+
+.entry.published .btn.publish,
+.entry .btn.unpublish {
+    display: none;
+}
+.entry.published .btn.unpublish {
+    display: block;
 }
