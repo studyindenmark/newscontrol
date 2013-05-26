@@ -20,10 +20,6 @@ class InviteHandler(webapp2.RequestHandler):
             self.error(403)
             return
         
-        if not users.is_current_user_admin():
-            self.error(401)
-            return
-        
         email = self.request.get('email')
         token = uuid.uuid1().hex
         

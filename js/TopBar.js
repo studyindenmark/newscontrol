@@ -4,11 +4,6 @@ function TopBar(newsControl) {
     self.tagsLoaded = false;
 
     self.init = function() {
-        $(document).bind('me_loaded', function() {
-            if (!newsControl.user.isAdmin) {
-                $('.dropdown-menu .invite').hide();
-            }
-        });
         $(document).one('tags_loaded', function() {
             self.tagsLoaded = true;
         });
