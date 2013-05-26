@@ -9,12 +9,14 @@ function All(newsControl) {
     self.tagsList = [];
     self.page = 0;
     self.loading = false;
+    self.hasMore = true;
 
     self.init = function() {
     };
     
     self.load = function() {
         self.page = 0;
+        self.hasMore = true;
         self.$ul.find('.entry').not('.template').remove();
         self.loadPage(0);
     };
@@ -33,11 +35,15 @@ function All(newsControl) {
             
             self.loading = false;
             loadingBar.setPercent(100);
+            
+            if (data.length === 0) {
+                self.hasMore = false;
+            }
         });
     };
 
     self.loadMore = function() {
-        if (self.loading === true) {
+        if (self.loading === true || !self.hasMore) {
             return;
         }
         
