@@ -20,6 +20,13 @@ indexes:
   properties:
   - name: language
   - name: tags
+  - name: time_published
+    direction: desc
+
+- kind: Entry
+  properties:
+  - name: language
+  - name: tags
   - name: title
 
 - kind: Entry

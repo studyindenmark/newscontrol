@@ -123,16 +123,15 @@ function News(newsControl) {
             $sortingTag = $('.sort-filter .sorting-tags');
         $sortingTag.val(tagname);
         console.log(tagname);
-        self.loadSortedEntries($sortingTag);
+        self.loadSortedEntries();
     };
 
-    self.loadSortedEntries = function(elem) {
-        var $this = typeof(elem) === 'undefined' ? $(this) : elem,
-            $parent = $this.parents('.sort-filter'),
-            $sorting = $parent.find('.sorting'),
-            $sortingOrder = $parent.find('.sorting-order'),
-            $sortingTags = $parent.find('.sorting-tags'),
-            $sortingLanguage = $parent.find('.sorting-language'),
+    self.loadSortedEntries = function() {
+        var $sortFilter = $('#news .sort-filter'),
+            $sorting = $sortFilter.find('.sorting'),
+            $sortingOrder = $sortFilter.find('.sorting-order'),
+            $sortingTags = $sortFilter.find('.sorting-tags'),
+            $sortingLanguage = $sortFilter.find('.sorting-language'),
             order = $sorting.val().toLowerCase() + '-' + $sortingOrder.val().toLowerCase(),
             tag = $sortingTags.val().toLowerCase(),
             lang = $sortingLanguage.val().toLowerCase(),
