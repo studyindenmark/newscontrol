@@ -85,12 +85,18 @@ input[type="text"].input-low {
 .tags-list .title-edit {
     display: none;
 }
+.tags-list .title {
+    margin: 5px 0;
+}
+.tags-list .tag {
+    margin: 0 6px 5px 0;
+}
 .tags-list .badge {
-    margin: 10px 5px 0 5px;
+    margin: 5px 5px 0 5px;
 }
 
 .tags-list .feed-link {
-    margin-top: 8px;
+    margin-top: 4px;
     margin-left: 10px;
     display: inline-block;
 }
