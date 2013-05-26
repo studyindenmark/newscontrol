@@ -16,11 +16,14 @@ import logging
 class AllHandler(webapp2.RequestHandler):
     def get(self):
         """Gets all entries"""
+        page = int(self.request.get('page', '0'))
+        page_size = 30
+        
         if not users.is_current_user_admin():
             self.error(401)
             return
             
-        entries = Entry.all().order('-time_published').fetch(50)
+        entries = Entry.all().order('-time_published').fetch(page_size, page_size * page)
             
         self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
         self.response.headers['Access-Control-Allow-Origin'] = '*'
