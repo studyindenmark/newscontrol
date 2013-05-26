@@ -1,14 +1,12 @@
 /**** Style for NewsControl ****/
 
-#all .entry .publish,
-#all .entry .unpublish,
-#all .entry .tags {
+/* General style
+**********************************************************/
+#news, #feeds, #tags, #all {
     display: none;
 }
 
-/* General style
-**********************************************************/
-#news, #feeds, #tags {
+.navbar .nav .all {
     display: none;
 }
 
@@ -105,6 +103,15 @@ input[type="text"].input-low {
     margin-top: 4px;
     margin-left: 10px;
     display: inline-block;
+}
+
+
+/* All page
+**********************************************************/
+#all .entry .publish,
+#all .entry .unpublish,
+#all .entry .tags {
+    display: none;
 }
 
 /* Entry

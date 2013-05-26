@@ -5,8 +5,8 @@ function TopBar(newsControl) {
 
     self.init = function() {
         $(document).bind('me_loaded', function() {
-            if (!newsControl.user.isAdmin) {
-                $('.tabs .all').hide();
+            if (newsControl.user.isAdmin) {
+                $('.tabs .all').show();
             }
         });
         $(document).one('tags_loaded', function() {
@@ -29,7 +29,12 @@ function TopBar(newsControl) {
         }
 
         if (tabName === 'all') {
-            newsControl.all.load();
+            if (newsControl.user.isAdmin) {
+                newsControl.all.load();
+            } else {
+                self.changeTab('news');
+                return;
+            }
         }
 
         localStorage.lastTab = tabName;
