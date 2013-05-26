@@ -39,6 +39,7 @@ function NewsControl() {
         
         self.loadingBar = new LoadingBar();
         self.news = new News(self);
+        self.all = new All(self);
         self.feeds = new Feeds(self);
         self.tags = new Tags(self);
         self.user = new User();

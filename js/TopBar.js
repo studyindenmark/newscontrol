@@ -4,6 +4,11 @@ function TopBar(newsControl) {
     self.tagsLoaded = false;
 
     self.init = function() {
+        $(document).bind('me_loaded', function() {
+            if (!newsControl.user.isAdmin) {
+                $('.tabs .all').hide();
+            }
+        });
         $(document).one('tags_loaded', function() {
             self.tagsLoaded = true;
         });
@@ -21,6 +26,10 @@ function TopBar(newsControl) {
 
         if (tabName === 'tags' && self.tagsLoaded) {
             newsControl.tags.loadTags();
+        }
+
+        if (tabName === 'all') {
+            newsControl.all.load();
         }
 
         localStorage.lastTab = tabName;

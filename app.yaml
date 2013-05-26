@@ -42,6 +42,9 @@ handlers:
 - url: /news
   script: news.app
 
+- url: /all
+  script: all.app
+
 - url: /(.*)/(.*)\.rss
   script: rss.app
 
