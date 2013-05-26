@@ -49,6 +49,7 @@ function NewsControl() {
         self.news.init();
         self.feeds.init();
         self.tags.init();
+        self.all.init();
         self.topBar.init();
         self.share.init();
     };

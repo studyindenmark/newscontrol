@@ -12,6 +12,13 @@ function All(newsControl) {
     self.hasMore = true;
 
     self.init = function() {
+        $(document).on('click', '#all .entry .title', self.togglePost);
+    };
+
+    self.togglePost = function() {
+        var $this = $(this),
+            $container = $this.parents('li.entry');
+        $container.toggleClass('maximized');
     };
     
     self.load = function() {
