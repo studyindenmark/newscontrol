@@ -49,7 +49,7 @@ var HTML = {
     },
 
     createInlineTag: function(title) {
-        return $('<a class="tag label label-info" href="javascript:void(0);">' + title + '</a>');
+        return $('<a class="tag label label-info" href="#"><span class="name">' + title + '</span>&nbsp;<span class="remove-tag">&times;</span></a>');
     },
 
     createSortingTagsList: function(tags) {

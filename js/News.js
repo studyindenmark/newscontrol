@@ -12,7 +12,8 @@ function News(newsControl) {
         $(document).on('click', '#news .btn.publish', self.togglePublishedCallback);
         $(document).on('click', '#news .btn.unpublish', self.togglePublishedCallback);
         $(document).on('keydown', '#news input.tag', self.tagKeyDown);
-        $(document).on('click', '#news .tags a.tag', self.untagEntry);
+        $(document).on('click', '#news .tags a.tag .remove-tag', self.untagEntry);
+        $(document).on('click', '#news .tags a.tag', self.filterByTag);
         $(document).on('click', '#news .entry .title', self.togglePost);
         
         $(document).on('change', '#news select.sorting-tags', self.loadSortedEntries);
@@ -71,7 +72,7 @@ function News(newsControl) {
     };
 
     self.tagEntry = function(elem) {
-        var $this = typeof(elem) === 'undefined' ? $(this) : elem,  
+        var $this = typeof(elem) === 'undefined' ? $(this) : elem,
             $container = $this.parents('li.entry'),
             feedId = $container.data('feedId'),
             modelId = $container.data('modelId'),
@@ -98,7 +99,7 @@ function News(newsControl) {
             $container = $this.parents('li.entry'),
             feedId = $container.data('feedId'),
             modelId = $container.data('modelId'),
-            tag_title = $this.text();
+            tag_title = $this.parent().find('.name').text();
         
         var url = '/feeds/$FEED_ID/entries/$ENTRY_ID/tags/$TAG_TITLE';
         
@@ -111,12 +112,22 @@ function News(newsControl) {
             url: url
         }).success(function(data) {
             console.log('Tagged entry', modelId, tag_title, data);
-            $this.remove();
+            $this.parent().remove();
         });
+        return false;
     };
 
-    self.loadSortedEntries = function() {
+    self.filterByTag = function() {
         var $this = $(this),
+            tagname = $this.find('.name').text(),
+            $sortingTag = $('.sort-filter .sorting-tags');
+        $sortingTag.val(tagname);
+        console.log(tagname);
+        self.loadSortedEntries($sortingTag);
+    };
+
+    self.loadSortedEntries = function(elem) {
+        var $this = typeof(elem) === 'undefined' ? $(this) : elem,
             $parent = $this.parents('.sort-filter'),
             $sorting = $parent.find('.sorting'),
             $sortingOrder = $parent.find('.sorting-order'),

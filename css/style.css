@@ -177,6 +177,14 @@ input[type="text"].input-low {
     background-color: #FFF;
 }
 
+.entry .tags .tag .remove-tag {
+    opacity: 0.4;
+    padding-left: 3px;
+}
+.entry .tags .tag .remove-tag:hover {
+    opacity: 1;
+}
+
 .entry.published .btn.publish,
 .entry .btn.unpublish {
     display: none;
