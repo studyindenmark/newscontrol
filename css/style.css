@@ -1,5 +1,11 @@
 /**** Style for NewsControl ****/
 
+#all .entry .publish,
+#all .entry .unpublish,
+#all .entry .tags {
+    display: none;
+}
+
 /* General style
 **********************************************************/
 #news, #feeds, #tags {
