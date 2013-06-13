@@ -70,16 +70,18 @@ class InputFeed(db.Model):
                 content = entry.get('summary')
 
             if fetch_all or (published > self.time_fetched):
-                m = Entry(
-                    guid=entry.get('guid'),
-                    link=entry.get('link'),
-                    parent=self,
-                    user=self.parent(),
-                    content=content,
-                    title=entry.get('title'),
-                    time_published=published,
-                )
-                m.put()
+                existing_entry = Entry.all().ancestor(self).filter('guid =', entry.get('guid')).count(read_policy=EVENTUAL_CONSISTENCY, limit=1) 
+                if not existing_entry:
+                    m = Entry(
+                        guid=entry.get('guid'),
+                        link=entry.get('link'),
+                        parent=self,
+                        user=self.parent(),
+                        content=content,
+                        title=entry.get('title'),
+                        time_published=published,
+                    )
+                    m.put()
             
         self.time_fetched = datetime.datetime.utcnow()
         self.save()
