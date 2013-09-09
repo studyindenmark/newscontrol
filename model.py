@@ -70,7 +70,7 @@ class InputFeed(db.Model):
                 content = entry.get('summary')
 
             if fetch_all or (published > self.time_fetched):
-                existing_entry = Entry.all().ancestor(self).filter('guid =', entry.get('guid')).count(read_policy=EVENTUAL_CONSISTENCY, limit=1) 
+                existing_entry = Entry.all().ancestor(self).filter('guid =', entry.get('guid')).count(read_policy=db.EVENTUAL_CONSISTENCY, limit=1) 
                 if not existing_entry:
                     m = Entry(
                         guid=entry.get('guid'),
