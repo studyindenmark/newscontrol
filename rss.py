@@ -22,6 +22,7 @@ class RSSHandler(webapp2.RequestHandler):
             self.error(403)
             return
             
+        tag_title = tag_title.decode('utf-8')
         tag = Tag.all().ancestor(user.key()).filter('title_lower =', tag_title.lower()).get()
 
         if not tag:

@@ -83,6 +83,7 @@ class TagEntryHandler(webapp2.RequestHandler):
             self.error(400)
             return
 
+        tag_title = tag_title.decode('utf-8')
         tag = Tag.all().ancestor(current_user).filter('title_lower =', tag_title.lower()).get()
 
         if not tag:
