@@ -90,6 +90,8 @@ class DeleteTagsHandler(webapp2.RequestHandler):
         """Delete the specified tag for the current user"""
         user = utils.get_current_user()
         
+        title = title.decode('utf-8')
+        
         if not user:
             self.error(403)
             return

@@ -56,6 +56,7 @@ class SpecificEntryHandler(webapp2.RequestHandler):
 
 class TagEntryHandler(webapp2.RequestHandler):
     def post(self, feed_id, entry_id, tag_title):
+        """ Create or modify tag """
         current_user = utils.get_current_user()
         
         if not current_user:
@@ -101,7 +102,10 @@ class TagEntryHandler(webapp2.RequestHandler):
         self.response.out.write('ok')
 
     def delete(self, feed_id, entry_id, tag_title):
+        """ Delete tag """
         current_user = utils.get_current_user()
+        
+        tag_title = tag_title.decode('utf-8')
         
         if not current_user:
             logging.info('no user logged in')
